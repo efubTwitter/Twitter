@@ -5,10 +5,10 @@ import { ReactComponent as HomeIconHover } from "../images/home_icon_hover.svg";
 import { ReactComponent as ProfileIcon } from "../images/profile_icon.svg";
 import { ReactComponent as ProfileIconHover } from "../images/profile_icon_hover.svg";
 import { ReactComponent as HashTagIcon } from "../images/hashtag_icon.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import Button from "./Button";
 
-const NavBar = () => {
+const NavBar = ({ main_user }) => {
   return (
     <NavBarContainer>
       <NavLink to="/">
@@ -21,14 +21,14 @@ const NavBar = () => {
           <P>Home</P>
         </MenuContainer>
       </HomeNavLink>
-      <HashTagNavLink to="/explore">
+      <ExploreNavLink to="/explore">
         <MenuContainer>
           <HashTag />
           <P>Explore</P>
         </MenuContainer>
-      </HashTagNavLink>
+      </ExploreNavLink>
       <ProfileNavLink
-        to="/users"
+        to="/users/efubteam1"
         style={{ textDecoration: "none", color: "white" }}
       >
         <MenuContainer>
@@ -38,14 +38,55 @@ const NavBar = () => {
         </MenuContainer>
       </ProfileNavLink>
       <Button text="Tweet" type="1" />
-      <User>프로필 사진 / 이름</User>
+      <Link to="/users/efubteam1">
+        <User>
+          <ProfileImg src={main_user.profilePhoto} />
+          <NameContainer>
+            <Name>{main_user.name}</Name>
+            <NickName>@{main_user.userId}</NickName>
+          </NameContainer>
+        </User>
+      </Link>
     </NavBarContainer>
   );
 };
 
-const HashTagNavLink = styled(NavLink)`
+const NameContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const NickName = styled.p`
+  color: #72767a;
+  font-weight: 500;
+  font-size: 16px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+  margin: 0px;
+  width: 30px;
+  margin-left: 10px;
+`;
+
+const Name = styled.p`
+  color: #72767a;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: white;
+`;
+
+const ExploreNavLink = styled(NavLink)`
   text-decoration: none;
   color: white;
+`;
+
+const ProfileImg = styled.img`
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 const HashTag = styled(HashTagIcon)`
@@ -134,6 +175,9 @@ const P = styled.p`
   ${ProfileNavLink}.${activeClassName} & {
     font-weight: 700;
   }
+  ${ExploreNavLink}.${activeClassName} & {
+    font-weight: 700;
+  }
 `;
 
 const MenuContainer = styled.div`
@@ -152,10 +196,10 @@ const MenuContainer = styled.div`
 `;
 
 const User = styled.button`
-  width: 87%;
+  width: 250px;
   height: 55px;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   font-size: 1.2rem;
   color: white;
   font-weight: 700;
@@ -163,7 +207,14 @@ const User = styled.button`
   background-color: black;
   display: flex;
   align-items: center;
-  margin-top: 30px;
+  position: absolute;
+  bottom: 50px;
+  padding-left: 20px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  :hover {
+    background-color: #181818;
+  }
 `;
 
 const Logo = styled(LogoIcon)`

@@ -33,10 +33,12 @@ const SearchBar = styled.input`
   color: white;
   background-color: #212327;
   border: none;
-  outline: none;
   padding-left: 20px;
   font-size: 15px;
   font-weight: 500;
+  :focus {
+    outline: 1.5px solid #2099ed;
+  }
 `;
 
 const TrendsContainer = styled.div`

@@ -47,6 +47,7 @@ const BtnTemplate = styled.div`
 
 const TrendsContent = styled.div`
   margin-bottom: 25px;
+  cursor: pointer;
 `;
 
 const Align = styled.div`

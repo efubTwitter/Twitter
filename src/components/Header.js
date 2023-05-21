@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Header = () => {
   return (
-    <>
+    <HeaderContainer>
       <Title>Home</Title>
       <SelectContainer>
         <OptionContainer>
@@ -11,23 +11,30 @@ const Header = () => {
         </OptionContainer>
         <Select2>Following</Select2>
       </SelectContainer>
-    </>
+    </HeaderContainer>
   );
 };
+
+const HeaderContainer = styled.div`
+  position: fixed;
+  width: 40rem;
+  top: 0px;
+  border-right: 1px solid #303336;
+  background-color: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+`;
 
 const SelectContainer = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 645px;
   border-bottom: 1px solid #303336;
 `;
 
 const Title = styled.p`
   font-size: 1.3rem;
   font-weight: 700;
-  margin-top: 0;
-  margin-top: 5px;
   padding-left: 18px;
+  margin-top: 0px;
 `;
 
 const Select1 = styled.p`

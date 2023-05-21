@@ -1,31 +1,42 @@
 import styled from "styled-components";
-import { ReactComponent as ExampleImg } from "../images/profile_example.svg";
 import { ReactComponent as MenuIcon } from "../images/menu_icon.svg";
 import { ReactComponent as DeleteButton } from "../images/delete_icon.svg";
-import { useNavigate } from "react-router-dom";
+import { ReactComponent as LikeIcon } from "../images/like_icon.svg";
+import { ReactComponent as LikeIconHover } from "../images/like_icon_hover.svg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Tweets = () => {
-  const navigate = useNavigate();
+const Tweets = ({
+  id,
+  name,
+  profile_photo,
+  content,
+  created_date,
+  tweet_id,
+}) => {
   const [toggleSetting, setToggleSetting] = useState(false);
 
   const ToggleIcon = () => {
     setToggleSetting(!toggleSetting);
   };
 
-  const handleClickPost = () => {
-    navigate("/users");
-  };
-  // name, nickname, content(text, image) 받아와서 보여주기.
-  // 지난 시간은 (현재 시간 - 게시 시간)으로 계산
+  // let date = created_date.slice(0, 10);
+  // let time = created_date.slice(11, 16);
+
   return (
     <TweetContainer>
-      <ProfileImg onClick={handleClickPost} />
+      <Link key={id} to={`/users/${id}`}>
+        <ProfileImg src={profile_photo} />
+      </Link>
       <ColumnTemplate>
         <NameContainer>
-          <Name onClick={handleClickPost}>World Of History</Name>
-          <NickName>@UmerBzv</NickName>
-          <Time> 17h</Time>
+          <Row>
+            <Link key={id} to={`/users/${id}`}>
+              <Name>{name}</Name>
+            </Link>
+            <NickName>@{id}</NickName>
+            <Time>{created_date}</Time>
+          </Row>
           <SettingIcon onClick={ToggleIcon} />
           <SettingContent toggle={toggleSetting}>
             <BtnTemplate>
@@ -34,16 +45,52 @@ const Tweets = () => {
             </BtnTemplate>
           </SettingContent>
         </NameContainer>
-        <ContentContainer>
-          <Content>
-            Size comparison between the Titanic and a Modern Cruise Ship
-          </Content>
-          <Img src="https://pbs.twimg.com/media/FwSB0wEXwAQQKgE?format=jpg&name=900x900" />
-        </ContentContainer>
+        <Link
+          key={id}
+          to={`/tweets/${tweet_id}`}
+          style={{ textDecoration: "none", color: "white" }}
+        >
+          <ContentContainer>
+            <Content>{content}</Content>
+            {/* <Img src="https://pbs.twimg.com/media/FwSB0wEXwAQQKgE?format=jpg&name=900x900" /> */}
+          </ContentContainer>
+        </Link>
+        <LikeContainer>
+          <LikeHover />
+          <LikeCounts>1</LikeCounts>
+        </LikeContainer>
       </ColumnTemplate>
     </TweetContainer>
   );
 };
+
+const LikeContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Row = styled.div`
+  display: flex;
+`;
+
+const LikeCounts = styled.p`
+  font-size: 14px;
+  margin-left: 13px;
+  color: #e53980;
+  font-weight: 500;
+`;
+
+const Like = styled(LikeIcon)`
+  width: 19px;
+  margin: 0px;
+  height: 50px;
+`;
+
+const LikeHover = styled(LikeIconHover)`
+  width: 19px;
+  margin: 0px;
+  height: 50px;
+`;
 
 const TweetContainer = styled.div`
   display: flex;
@@ -52,13 +99,16 @@ const TweetContainer = styled.div`
 
 const NameContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding-right: 12px;
 `;
 
 const ColumnTemplate = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 12px;
+  width: 100%;
 `;
 
 const DeleteContent = styled.p`
@@ -72,16 +122,19 @@ const DeleteBtn = styled(DeleteButton)`
   width: 16px;
 `;
 
-const ProfileImg = styled(ExampleImg)`
+const ProfileImg = styled.img`
   width: 50px;
-  padding-left: 18px;
+  height: 50px;
+  margin-left: 15px;
+  margin-top: 15px;
+  border-radius: 50%;
   cursor: pointer;
 `;
 
 const NickName = styled.p`
   color: #72767a;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 17px;
   margin-right: 5px;
   margin-bottom: 3px;
 `;
@@ -95,13 +148,12 @@ const Name = styled(NickName)`
   }
 `;
 
-const Time = styled(NickName)`
-  margin-right: 52%;
-`;
+const Time = styled(NickName)``;
 
 const SettingIcon = styled(MenuIcon)`
-  width: 18px;
+  width: 17px;
   cursor: pointer;
+  margin-right: 15px;
 `;
 
 const BtnTemplate = styled.div`
@@ -129,10 +181,11 @@ const SettingContent = styled.div`
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const Content = styled.p`
-  margin-top: 0px;
+  margin-top: 4px;
 `;
 
 const Img = styled.img`

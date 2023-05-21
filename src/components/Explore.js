@@ -21,7 +21,7 @@ const Explore = () => {
 const ExploreContainer = styled.div`
   margin-left: 270px;
   height: 100vh;
-  width: 650px;
+  width: 40rem;
   border-right: 1px solid #303336;
   border-left: 1px solid #303336;
 `;
@@ -38,6 +38,9 @@ const SearchBar = styled.input`
   font-size: 15px;
   font-weight: 500;
   margin-left: 30px;
+  :focus {
+    outline: 1.5px solid #2099ed;
+  }
 `;
 
 const TrendsContainer = styled.div`

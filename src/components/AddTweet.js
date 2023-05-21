@@ -1,12 +1,14 @@
 import styled from "styled-components";
-import { ReactComponent as ExampleImg } from "../images/profile_example.svg";
 import { ReactComponent as ImageIcon } from "../images/image_icon.svg";
 import { ReactComponent as DeleteImgIcon } from "../images/delete_img_icon.svg";
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import Button from "./Button";
+import axios from "axios";
 
-const AddTweet = () => {
-  const [imgFile, setImgFile] = useState("");
+const AddTweet = ({ main }) => {
+  const [imgfile, setImgFile] = useState("");
+  const [tweetContent, setTweetContent] = useState(""); // 입력된 트윗 내용 상태 추가
   const imgRef = useRef();
 
   // 이미지 프리뷰 생성
@@ -21,19 +23,39 @@ const AddTweet = () => {
 
   // 이미지 프리뷰 삭제
   const deleteFileImg = () => {
-    URL.revokeObjectURL(imgFile);
+    URL.revokeObjectURL(imgfile);
     setImgFile("");
+  };
+
+  // 트윗 내용 변경 핸들러
+  const handleTweetContentChange = (e) => {
+    setTweetContent(e.target.value);
+  };
+
+  // 트윗 작성 핸들러
+  const handleTweetPost = () => {
+    // tweetContent 값 활용하여 트윗 작성 작업 수행
+    console.log("Tweet Content:", tweetContent);
+    axios.post("http://3.38.233.150:8080/tweets", {
+      writerId: "efubteam1",
+      content: tweetContent,
+    });
+    setTweetContent("");
   };
 
   return (
     <>
       <AddContainer>
-        <ProfileImg />
-        <InputText placeholder="What is happening?!"></InputText>
+        <ProfileImg src={main.profilePhoto} />
+        <InputText
+          placeholder="What is happening?!"
+          value={tweetContent}
+          onChange={handleTweetContentChange}
+        ></InputText>
       </AddContainer>
-      <ImgContainer imgFile={imgFile}>
-        <DeleteImgBtn imgFile={imgFile} onClick={deleteFileImg} />
-        <PreImg src={imgFile ? imgFile : ``} />
+      <ImgContainer imgfile={imgfile}>
+        <DeleteImgBtn imgfile={imgfile} onClick={deleteFileImg} />
+        <PreImg src={imgfile ? imgfile : ``} />
       </ImgContainer>
       <BtnContainer>
         <InputImg
@@ -47,7 +69,9 @@ const AddTweet = () => {
         <label htmlFor="file">
           <ImgIcon />
         </label>
-        <Button text="Tweet" type="2" />
+        <Link>
+          <Button text="Tweet" type="2" onClick={handleTweetPost} />
+        </Link>
       </BtnContainer>
       <Line />
     </>
@@ -58,18 +82,21 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   height: 70px;
+  margin-top: 100px;
 `;
 
 const ImgContainer = styled.div`
-  height: ${(props) => (props.imgFile ? "100%" : "0px")};
+  height: ${(props) => (props.imgfile ? "100%" : "0px")};
 `;
 
 const BtnContainer = styled(AddContainer)`
   margin-left: 14%;
   display: flex;
   justify-content: space-between;
-  margin-right: 4%;
+  align-items: center;
+  margin-right: 3%;
   height: 50px;
+  margin-top: 0px;
 `;
 
 const DeleteImgBtn = styled(DeleteImgIcon)`
@@ -79,12 +106,13 @@ const DeleteImgBtn = styled(DeleteImgIcon)`
   margin-left: 90px;
   margin-top: 7px;
   cursor: pointer;
-  display: ${(props) => (props.imgFile ? "block" : "none")};
+  display: ${(props) => (props.imgfile ? "block" : "none")};
 `;
 
-const ProfileImg = styled(ExampleImg)`
+const ProfileImg = styled.img`
   width: 50px;
   padding-left: 18px;
+  border-radius: 50%;
 `;
 
 const PreImg = styled.img`

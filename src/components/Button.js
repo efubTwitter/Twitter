@@ -18,13 +18,14 @@ const Btn1 = styled.button`
   font-size: 1.2rem;
   color: white;
   font-weight: 700;
-  margin-top: 45vh;
+  position: absolute;
+  bottom: 180px;
   background-color: #2099ed;
   cursor: pointer;
 `;
 
 const Btn2 = styled.button`
-  width: 17%;
+  width: 85px;
   height: 37px;
   border: none;
   border-radius: 30px;
@@ -33,7 +34,7 @@ const Btn2 = styled.button`
   font-weight: 700;
   background-color: #2099ed;
   cursor: pointer;
-  margin-bottom: 7px;
+  margin-bottom: 4px;
 `;
 
 const Btn3 = styled.button`
@@ -47,9 +48,9 @@ const Btn3 = styled.button`
   background-color: black;
   cursor: pointer;
   border: 1px solid #566470;
-  margin-left: 520px;
+  margin-left: 510px;
   margin-top: 12px;
-  margin-right: 10px;
+  margin-right: 15px;
 `;
 
 export default Button;

@@ -4,15 +4,10 @@ import Tweets from "./Tweets";
 import Button from "./Button";
 import Search from "./Search";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
-const Profile = ({ tweets }) => {
-  const params = useParams();
-  const userId = params.id;
+const MainUserProfile = ({ main }) => {
   const navigate = useNavigate();
 
-  const user = tweets.find((u) => u.writer.userId === userId);
-  console.log(user);
   const handleNavigate = () => {
     navigate("/");
   };
@@ -23,22 +18,22 @@ const Profile = ({ tweets }) => {
         <Header>
           <ArrowIcon onClick={handleNavigate} />
           <ColumnTemplate>
-            <Name>{user.writer.name}</Name>
+            <Name>{main.name}</Name>
             <CountTweets>
-              {tweets.filter((u) => u.writer.userId === userId).length} Tweets
+              {/* {tweets.filter((u) => u.writer.userId === userId).length} Tweets */}
             </CountTweets>
           </ColumnTemplate>
         </Header>
         <Img>
-          <BackgroundImg src={user.writer.headerPhoto} />
+          <BackgroundImg src={main.headerPhoto} />
         </Img>
-        <ProfileImg src={user.writer.profilePhoto} />
+        <ProfileImg src={main.profilePhoto} />
         <Button text="Edit profile" type="3" />
         <Intro>
-          <Name>{user.writer.name}</Name>
-          <NickName>@{user.writer.userId}</NickName>
-          <Bio>{user.writer.bio}</Bio>
-          <NickName>Joined {user.writer.joinedDate.slice(0, 10)}</NickName>
+          <Name>{main.name}</Name>
+          <NickName>@{main.userId}</NickName>
+          <Bio>{main.bio}</Bio>
+          <NickName>Joined {main.joinedDate.slice(0, 10)}</NickName>
         </Intro>
         <SelectContainer>
           <OptionContainer>
@@ -49,7 +44,7 @@ const Profile = ({ tweets }) => {
           <Select2>Media</Select2>
           <Select2>Likes</Select2>
         </SelectContainer>
-        {tweets
+        {/* {tweets
           .filter((u) => u.writer.userId === userId)
           .map((tweet) => (
             <Tweets
@@ -61,7 +56,7 @@ const Profile = ({ tweets }) => {
               created_date={tweet.createdDate}
               tweet_id={tweet.tweetId}
             />
-          ))}
+          ))} */}
       </ProfileContainer>
       <Search />
     </Container>
@@ -186,4 +181,4 @@ const BackgroundImg = styled.img`
   background-color: #343639;
 `;
 
-export default Profile;
+export default MainUserProfile;
