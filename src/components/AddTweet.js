@@ -129,7 +129,7 @@ const PreImg = styled.img`
 `;
 
 const InputText = styled.input`
-  width: 300px;
+  width: 500px;
   height: 50%;
   font-size: 22px;
   font-weight: 500;

@@ -60,6 +60,7 @@ const Profile = ({ tweets }) => {
               content={tweet.content}
               created_date={tweet.createdDate}
               tweet_id={tweet.tweetId}
+              heart={tweet.heatCount}
             />
           ))}
       </ProfileContainer>

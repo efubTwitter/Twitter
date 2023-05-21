@@ -5,6 +5,7 @@ import { ReactComponent as LikeIcon } from "../images/like_icon.svg";
 import { ReactComponent as LikeIconHover } from "../images/like_icon_hover.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Tweets = ({
   id,
@@ -13,13 +14,28 @@ const Tweets = ({
   content,
   created_date,
   tweet_id,
+  heart,
 }) => {
   const [toggleSetting, setToggleSetting] = useState(false);
 
   const ToggleIcon = () => {
-    setToggleSetting(!toggleSetting);
+    if (id === "efubteam1") setToggleSetting(!toggleSetting);
   };
 
+  const handleDelete = () => {
+    axios
+      .delete(`http://3.38.233.150:8080/tweets/${tweet_id}`)
+      .then(function (response) {
+        // handle success
+        console.log(response.status);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
+
+  // slice에서 오류 발생해서 나중에 수정
   // let date = created_date.slice(0, 10);
   // let time = created_date.slice(11, 16);
 
@@ -39,7 +55,7 @@ const Tweets = ({
           </Row>
           <SettingIcon onClick={ToggleIcon} />
           <SettingContent toggle={toggleSetting}>
-            <BtnTemplate>
+            <BtnTemplate onClick={handleDelete}>
               <DeleteBtn />
               <DeleteContent>Delete</DeleteContent>
             </BtnTemplate>
@@ -56,8 +72,8 @@ const Tweets = ({
           </ContentContainer>
         </Link>
         <LikeContainer>
-          <LikeHover />
-          <LikeCounts>1</LikeCounts>
+          <Like />
+          <LikeCounts>{heart > 0 ? heart : ""}</LikeCounts>
         </LikeContainer>
       </ColumnTemplate>
     </TweetContainer>
@@ -76,7 +92,8 @@ const Row = styled.div`
 const LikeCounts = styled.p`
   font-size: 14px;
   margin-left: 13px;
-  color: #e53980;
+  color: wheat;
+  /* color: #e53980; */
   font-weight: 500;
 `;
 
@@ -84,12 +101,14 @@ const Like = styled(LikeIcon)`
   width: 19px;
   margin: 0px;
   height: 50px;
+  cursor: pointer;
 `;
 
 const LikeHover = styled(LikeIconHover)`
   width: 19px;
   margin: 0px;
   height: 50px;
+  cursor: pointer;
 `;
 
 const TweetContainer = styled.div`

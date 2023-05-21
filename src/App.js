@@ -81,7 +81,7 @@ function App() {
           {tweets.length > 0 && (
             <Route
               path="/users/efubteam1"
-              element={<MainUserProfile main={mainUser} />}
+              element={<MainUserProfile main={mainUser} tweets={tweets} />}
             ></Route>
           )}
         </Routes>

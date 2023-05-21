@@ -5,7 +5,7 @@ import Button from "./Button";
 import Search from "./Search";
 import { useNavigate } from "react-router-dom";
 
-const MainUserProfile = ({ main }) => {
+const MainUserProfile = ({ main, tweets }) => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -20,7 +20,8 @@ const MainUserProfile = ({ main }) => {
           <ColumnTemplate>
             <Name>{main.name}</Name>
             <CountTweets>
-              {/* {tweets.filter((u) => u.writer.userId === userId).length} Tweets */}
+              {tweets.filter((u) => u.writer.userId === main.userId).length}
+              Tweets
             </CountTweets>
           </ColumnTemplate>
         </Header>
@@ -44,19 +45,19 @@ const MainUserProfile = ({ main }) => {
           <Select2>Media</Select2>
           <Select2>Likes</Select2>
         </SelectContainer>
-        {/* {tweets
-          .filter((u) => u.writer.userId === userId)
-          .map((tweet) => (
+        {tweets
+          .filter((t) => t.writer.userId === "efubteam1")
+          .map((n) => (
             <Tweets
-              key={tweet.writer.userId}
-              id={tweet.writer.userId}
-              name={tweet.writer.name}
-              profile_photo={tweet.writer.profilePhoto}
-              content={tweet.content}
-              created_date={tweet.createdDate}
-              tweet_id={tweet.tweetId}
+              key={main.userId}
+              id={main.userId}
+              name={main.name}
+              profile_photo={main.profilePhoto}
+              content={n.content}
+              created_date={main.createdDate}
+              tweet_id={main.tweetId}
             />
-          ))} */}
+          ))}
       </ProfileContainer>
       <Search />
     </Container>

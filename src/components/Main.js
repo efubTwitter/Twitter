@@ -20,6 +20,7 @@ const Main = ({ tweets, main }) => {
               content={tweet.content}
               created_date={tweet.createdDate}
               tweet_id={tweet.tweetId}
+              heart={tweet.heartCount}
             />
           ))}
         </MainContainer>
