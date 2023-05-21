@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const Button = ({ text, type }) => {
-  return type === "1" ? (
+const Button = ({ text, types }) => {
+  return types === "1" ? (
     <Btn1>{text}</Btn1>
-  ) : type === "2" ? (
+  ) : types === "2" ? (
     <Btn2>{text}</Btn2>
   ) : (
     <Btn3>{text}</Btn3>

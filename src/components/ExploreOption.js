@@ -3,7 +3,9 @@ import { ReactComponent as MenuIcon } from "../images/menu_icon.svg";
 import { ReactComponent as BadEmoji } from "../images/bad_emoji_icon.svg";
 import { useState } from "react";
 
-const MenuOption = () => {
+// 필요없음
+
+const ExploreOption = () => {
   const [toggleSetting, setToggleSetting] = useState(false);
 
   const ToggleIcon = () => {
@@ -61,4 +63,4 @@ const SettingContent = styled.div`
   display: ${(props) => (props.toggle ? "block" : "none")};
 `;
 
-export default MenuOption;
+export default ExploreOption;

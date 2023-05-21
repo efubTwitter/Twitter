@@ -73,6 +73,7 @@ function App() {
 
           {tweets.length > 0 && (
             <Route
+              key={mainUser.id}
               path="/users/:id"
               element={<Profile tweets={tweets} />}
             ></Route>

@@ -32,48 +32,55 @@ const AddTweet = ({ main }) => {
     setTweetContent(e.target.value);
   };
 
-  // 트윗 작성 핸들러
-  const handleTweetPost = () => {
-    // tweetContent 값 활용하여 트윗 작성 작업 수행
-    console.log("Tweet Content:", tweetContent);
-    axios.post("http://3.38.233.150:8080/tweets", {
+  // post 요청
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = {
       writerId: "efubteam1",
       content: tweetContent,
-    });
+    };
+    axios
+      .post("http://3.38.233.150:8080/tweets", data)
+      .then((response) => {
+        console.log(response.status, response.data);
+      })
+      .catch((error) => {
+        console.log(error); // 오류 처리
+      });
     setTweetContent("");
   };
 
   return (
     <>
-      <AddContainer>
-        <ProfileImg src={main.profilePhoto} />
-        <InputText
-          placeholder="What is happening?!"
-          value={tweetContent}
-          onChange={handleTweetContentChange}
-        ></InputText>
-      </AddContainer>
-      <ImgContainer imgfile={imgfile}>
-        <DeleteImgBtn imgfile={imgfile} onClick={deleteFileImg} />
-        <PreImg src={imgfile ? imgfile : ``} />
-      </ImgContainer>
-      <BtnContainer>
-        <InputImg
-          type="file"
-          name="file"
-          id="file"
-          accept="image/*"
-          onChange={saveImgFile}
-          ref={imgRef}
-        ></InputImg>
-        <label htmlFor="file">
-          <ImgIcon />
-        </label>
-        <Link>
-          <Button text="Tweet" type="2" onClick={handleTweetPost} />
-        </Link>
-      </BtnContainer>
-      <Line />
+      <form onSubmit={handleSubmit}>
+        <AddContainer>
+          <ProfileImg src={main.profilePhoto} />
+          <InputText
+            placeholder="What is happening?!"
+            value={tweetContent}
+            onChange={handleTweetContentChange}
+          ></InputText>
+        </AddContainer>
+        <ImgContainer imgfile={imgfile}>
+          <DeleteImgBtn imgfile={imgfile} onClick={deleteFileImg} />
+          <PreImg src={imgfile ? imgfile : ``} />
+        </ImgContainer>
+        <BtnContainer>
+          <InputImg
+            type="file"
+            name="file"
+            id="file"
+            accept="image/*"
+            onChange={saveImgFile}
+            ref={imgRef}
+          ></InputImg>
+          <label htmlFor="file">
+            <ImgIcon />
+          </label>
+          <Button text="Tweet" types="2" type="submit" />
+        </BtnContainer>
+        <Line />
+      </form>
     </>
   );
 };

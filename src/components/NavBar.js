@@ -37,7 +37,7 @@ const NavBar = ({ main_user }) => {
           <P>Profile</P>
         </MenuContainer>
       </ProfileNavLink>
-      <Button text="Tweet" type="1" />
+      <Button text="Tweet" types="1" />
       <Link to="/users/efubteam1">
         <User>
           <ProfileImg src={main_user.profilePhoto} />

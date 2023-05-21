@@ -7,7 +7,7 @@ const Reply = () => {
     <ReplyContainer>
       <ProfileImg />
       <ReplyInput placeholder="Tweet your reply!" />
-      <Button text="Reply" type="2" />
+      <Button text="Reply" types="2" />
     </ReplyContainer>
   );
 };
