@@ -5,6 +5,7 @@ import Template from "./components/Template";
 import Profile from "./components/Profile";
 import Explore from "./components/Explore";
 import DetailPage from "./components/DetailPage";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import MainUserProfile from "./components/MainUserProfile";
@@ -52,8 +53,8 @@ function App() {
   return (
     <>
       <Template>
+        {isLoading ? "...Loading" : ""}
         <NavBar main_user={mainUser} />
-        {isLoading ? "...Loading " : ""}
         <Routes>
           {tweets.length > 0 && (
             <Route

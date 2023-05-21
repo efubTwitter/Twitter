@@ -19,6 +19,7 @@ const HeaderContainer = styled.div`
   position: fixed;
   width: 40rem;
   top: 0px;
+  padding-top: 12px;
   border-right: 1px solid #303336;
   background-color: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(6px);

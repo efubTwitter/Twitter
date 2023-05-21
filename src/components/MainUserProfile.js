@@ -55,7 +55,7 @@ const MainUserProfile = ({ main, tweets }) => {
               profile_photo={main.profilePhoto}
               content={n.content}
               created_date={main.createdDate}
-              tweet_id={main.tweetId}
+              tweet_id={n.tweetId}
             />
           ))}
       </ProfileContainer>

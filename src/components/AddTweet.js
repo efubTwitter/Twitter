@@ -89,7 +89,7 @@ const AddContainer = styled.div`
   display: flex;
   align-items: center;
   height: 70px;
-  margin-top: 100px;
+  margin-top: 120px;
 `;
 
 const ImgContainer = styled.div`
