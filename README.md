@@ -1,14 +1,22 @@
 ## 💙 Twitter 클론 코딩
 
-### 기능 설명
+### 🔗 기능 설명
+구현 완료된 기능(5/17 ~ 5/21)
+- [x] 좌측 네비게이션 바의 라우팅 부분
+- [x] 메인 화면의 전체 트윗 보기 기능(GET) 및 화면
+- [x] 세부 화면의 트윗 개별 보기 기능(GET) 및 화면
+- [x] 프로필 화면의 사용자 정보 불러오기 기능(GET) 및 화면
+- [x] 트윗 작성 기능(POST)
+- [x] 트윗 삭제 기능(DELETE)
 
-트위터 클론코딩
-- CRUD 완성
-- 좋아요 & 유저검색 기능 구현중
+구현 중인 기능
+- [ ] 좋아요 버튼
+- [ ] 좋아요 누른 게시글 모아보기  
+- [ ] 유저검색 기능
 
 <br>
 
-### 페이지
+### 🔗 상세 페이지
 <img width="1413" alt="스크린샷 2023-05-21 오후 11 08 15" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/67f17623-a267-48aa-92fc-4b74392cb3b2">
 <img width="1414" alt="스크린샷 2023-05-21 오후 11 08 33" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5b77c7a6-3864-4ed6-891f-e654ba803cca">
 <img width="1415" alt="스크린샷 2023-05-21 오후 11 08 43" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5588f00e-615d-4339-b5bf-88f8167feb31">
@@ -19,7 +27,7 @@
 
 <br>
 
-### 팀원 구성
+### 🔗 팀원 구성
 
 : 프론트엔드 1명, 백엔드 1명으로 구성
 | POSITION | NAME |
@@ -29,7 +37,7 @@
 
 <br>
 
-### 기술 스택
+### 🔗 기술 스택
 
 | POSITION   | STACK                            |
 | ---------- | -------------------------------- |
@@ -39,8 +47,8 @@
 
 <br>
 
-### 풀더 구조
-```
+### 🔗 풀더 구조
+```javascript
 ├── node_modules
 ├── README.md
 ├── package-lock.json
