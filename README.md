@@ -2,7 +2,20 @@
 
 ### 기능 설명
 
-트위터 클론코딩(CRUD, 좋아요, 해시태그 기능 구현 예정)
+트위터 클론코딩
+- CRUD 완성
+- 좋아요 & 유저검색 기능 구현중
+
+<br>
+
+### 페이지
+<img width="1413" alt="스크린샷 2023-05-21 오후 11 08 15" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/67f17623-a267-48aa-92fc-4b74392cb3b2">
+<img width="1414" alt="스크린샷 2023-05-21 오후 11 08 33" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5b77c7a6-3864-4ed6-891f-e654ba803cca">
+<img width="1415" alt="스크린샷 2023-05-21 오후 11 08 43" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5588f00e-615d-4339-b5bf-88f8167feb31">
+<img width="1418" alt="스크린샷 2023-05-21 오후 11 09 10" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/8a46dc8a-6c96-4420-88dc-25abb5f16574">
+<img width="1417" alt="스크린샷 2023-05-21 오후 11 09 02" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/60763262-db4f-4670-bdf8-dc2274f67fbf">
+<img width="1416" alt="스크린샷 2023-05-21 오후 11 30 29" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/7e14264e-f1ce-4fab-af19-c75e1be2f4b3">
+
 
 <br>
 
