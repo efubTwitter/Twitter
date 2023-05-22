@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { ReactComponent as ImageIcon } from "../images/image_icon.svg";
-import { ReactComponent as DeleteImgIcon } from "../images/delete_img_icon.svg";
+import { ReactComponent as ImageIcon } from "../../images/image_icon.svg";
+import { ReactComponent as DeleteImgIcon } from "../../images/delete_img_icon.svg";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
-import Button from "./Button";
+import Button from "../Button";
 import axios from "axios";
 
-const AddTweet = ({ main }) => {
+const AddTweet = ({ main, tweets, setTweets }) => {
   const [imgfile, setImgFile] = useState("");
   const [tweetContent, setTweetContent] = useState(""); // 입력된 트윗 내용 상태 추가
   const imgRef = useRef();
@@ -33,20 +32,23 @@ const AddTweet = ({ main }) => {
   };
 
   // post 요청
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       writerId: "efubteam1",
       content: tweetContent,
     };
-    axios
-      .post("http://3.38.233.150:8080/tweets", data)
-      .then((response) => {
-        console.log(response.status, response.data);
-      })
-      .catch((error) => {
-        console.log(error); // 오류 처리
-      });
+
+    try {
+      const res = await axios.post("http://3.38.233.150:8080/tweets", data);
+      if (res.status === "201") {
+        setTweets([...tweets, res.data]);
+      }
+      console.log(res.status);
+    } catch (error) {
+      console.log(error); // 오류 처리
+    }
+
     setTweetContent("");
   };
 

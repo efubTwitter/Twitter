@@ -1,14 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import Main from "./components/Main";
-import Template from "./components/Template";
-import Profile from "./components/Profile";
-import Explore from "./components/Explore";
-import DetailPage from "./components/DetailPage";
-
+import Main from "./components/Home/Main";
+import Template from "./components/Explore/Template";
+import Profile from "./components/Profile/Profile";
+import Explore from "./components/Explore/Explore";
+import DetailPage from "./components/Tweets/DetailPage";
+import MainUserProfile from "./components/Profile/MainUserProfile";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import MainUserProfile from "./components/MainUserProfile";
 
 function App() {
   // 로딩 중 트위터 화면
@@ -59,7 +58,9 @@ function App() {
           {tweets.length > 0 && (
             <Route
               path="/"
-              element={<Main tweets={tweets} main={mainUser} />}
+              element={
+                <Main tweets={tweets} main={mainUser} setTweets={setTweets} />
+              }
             ></Route>
           )}
           {tweets.length > 0 && (

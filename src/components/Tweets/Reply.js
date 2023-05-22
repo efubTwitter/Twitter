@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Button from "./Button";
-import { ReactComponent as ExampleImg } from "../images/profile_example.svg";
+import Button from "../Button";
+import { ReactComponent as ExampleImg } from "../../images/profile_example.svg";
 
 const Reply = () => {
   return (

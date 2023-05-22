@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { ReactComponent as MenuIcon } from "../images/menu_icon.svg";
-import { ReactComponent as DeleteButton } from "../images/delete_icon.svg";
-import { ReactComponent as LikeIcon } from "../images/like_icon.svg";
-import { ReactComponent as LikeIconHover } from "../images/like_icon_hover.svg";
+import { ReactComponent as MenuIcon } from "../../images/menu_icon.svg";
+import { ReactComponent as DeleteButton } from "../../images/delete_icon.svg";
+import { ReactComponent as LikeIcon } from "../../images/like_icon.svg";
+import { ReactComponent as LikeIconHover } from "../../images/like_icon_hover.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";

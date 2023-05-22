@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { ReactComponent as MenuIcon } from "../images/menu_icon.svg";
-import { ReactComponent as BadEmoji } from "../images/bad_emoji_icon.svg";
+import { ReactComponent as MenuIcon } from "../../images/menu_icon.svg";
+import { ReactComponent as BadEmoji } from "../../images/bad_emoji_icon.svg";
 import { useState } from "react";
 
 const Trends = ({ margin }) => {

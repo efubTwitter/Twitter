@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import Header from "./Header";
 import AddTweet from "./AddTweet";
-import Tweets from "./Tweets";
-import Search from "./Search";
+import Tweets from "../Tweets/Tweets";
+import Search from "../Explore/Search";
 
-const Main = ({ tweets, main }) => {
+const Main = ({ tweets, main, setTweets }) => {
   return (
     <>
       <Container>
         <MainContainer>
           <Header />
-          <AddTweet main={main} />
+          <AddTweet main={main} tweets={tweets} setTweets={setTweets} />
           {tweets.map((tweet) => (
             <Tweets
               key={tweet.tweetId}

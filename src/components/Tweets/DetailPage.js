@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ReactComponent as Arrow } from "../images/arrow_icon.svg";
+import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
 import Tweets from "./Tweets";
-import Search from "./Search";
+import Search from "../Explore/Search";
 import Reply from "./Reply";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
