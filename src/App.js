@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Main from "./components/Home/Main";
-import Template from "./components/Explore/Template";
+import Template from "./components/Template";
 import Profile from "./components/Profile/Profile";
 import Explore from "./components/Explore/Explore";
 import DetailPage from "./components/Tweets/DetailPage";
