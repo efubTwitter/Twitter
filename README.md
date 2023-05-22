@@ -55,7 +55,7 @@
 ├── package.json
 ├── .gitignore
 ├── public
-│   ├── favicon.ico
+│   ├── favicon.ico (넣을 예정)
 │   ├── index.html
 └── src
     ├── App.js
@@ -63,18 +63,23 @@
     ├── index.js
     ├── images
     └── components
-	      ├── AddTweet.js : 텍스트, 이미지 입력(이미지 미리보기, 삭제), 게시물 업로드 버튼
-	      ├── Button.js : 사이즈 별 버튼 컴포넌트
-	      ├── DetailPage.js : 트윗 개별 상세페이지
-	      ├── Explore.js : Explore 페이지
-	      ├── Header.js : Home 페이지의 헤더
-	      ├── Main.js : Home 페이지
-	      ├── MainUserProfile.js : 메인 유저 전용 프로필 컴포넌트(로그인 기능 부재로 임시 선정)
-	      ├── NavBar.js : 좌측 메뉴바, 트윗 버튼, 유저 미니 프로필
-	      ├── Profile.js : 개별 상세 프로필
-	      ├── Reply.js : 답글 입력 컴포넌트
-	      ├── Search.js : Explore 페이지 내부 검색 창
-	      ├── Template.js : 자식 요소 가로 방향으로 정렬하는 템플릿
-	      ├── Trends.js : Explore 페이지 내부 요소
-  	      └── Tweets.js : 개별 트윗 컴포넌트
+	├── Explore
+	│   ├── Explore.js : Explore 페이지
+	│   ├── Search.js : Explore 페이지 내부 검색 창	    
+	│   └── Trends.js : Explore 페이지 내부 요소
+	├── Home
+	│   ├── AddTweet.js : 텍스트, 이미지 입력(이미지 미리보기, 삭제), 게시물 업로드 버튼
+	│   ├── Header.js : Home 페이지 헤더
+	│   └── Main.js : Home 페이지
+	├── Profile
+	│   ├── MainUserProfile.js : 메인 유저 전용 프로필 컴포넌트
+	│   └── Profile.js : 개별 상세 프로필
+	├── Tweets
+	│   ├── DetailPage.js : 트윗 개별 상세페이지
+	│   ├── Reply.js : 답글 입력 컴포넌트
+	│   └── Tweets.js : 개별 트윗 컴포넌트
+	├── Button.js : 사이즈 별 버튼 컴포넌트
+	├── NavBar.js : 좌측 메뉴바, 트윗 버튼, 유저 미니 프로필
+	└── Template.js : 자식 요소 가로 방향으로 정렬하는 템플릿
+  	   
 ```
