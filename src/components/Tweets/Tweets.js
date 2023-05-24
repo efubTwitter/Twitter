@@ -14,15 +14,27 @@ const Tweets = ({
   content,
   created_date,
   tweet_id,
-  heart,
+  heartList,
 }) => {
   const [toggleSetting, setToggleSetting] = useState(false);
+  const [heartClick, setHeartClick] = useState(heartList.includes("efubteam1"));
 
   const ToggleIcon = () => {
     if (id === "efubteam1") setToggleSetting(!toggleSetting);
   };
 
-  const handleDelete = () => {
+  const handleClick = async () => {
+    const res = await axios.post(
+      `http://3.38.233.150:8080/users/${id}/hearts`,
+      {
+        tweetId: tweet_id,
+      }
+    );
+    console.log(res.status, res.data);
+    setHeartClick(res.data.isClicked);
+  };
+
+  const handleDeleteContent = () => {
     axios
       .delete(`http://3.38.233.150:8080/tweets/${tweet_id}`)
       .then(function (response) {
@@ -35,34 +47,37 @@ const Tweets = ({
       });
   };
 
-  // slice에서 오류 발생해서 나중에 수정
-  // let date = created_date.slice(0, 10);
-  // let time = created_date.slice(11, 16);
+  // slice 사용하면 오류 발생 -> toLocaleString : 지역화된 날짜 및 시간 문자열을 반환.
+  let date = new Date(created_date).toLocaleString();
 
   return (
     <TweetContainer>
-      <Link key={id} to={`/users/${id}`}>
+      <Link key={tweet_id} to={`/users/${id}`}>
         <ProfileImg src={profile_photo} />
       </Link>
       <ColumnTemplate>
         <NameContainer>
           <Row>
-            <Link key={id} to={`/users/${id}`}>
+            <Link
+              key={tweet_id}
+              to={`/users/${id}`}
+              style={{ textDecoration: "none" }}
+            >
               <Name>{name}</Name>
             </Link>
             <NickName>@{id}</NickName>
-            <Time>{created_date}</Time>
+            <Time>{date}</Time>
           </Row>
           <SettingIcon onClick={ToggleIcon} />
           <SettingContent toggle={toggleSetting}>
-            <BtnTemplate onClick={handleDelete}>
+            <BtnTemplate onClick={handleDeleteContent}>
               <DeleteBtn />
               <DeleteContent>Delete</DeleteContent>
             </BtnTemplate>
           </SettingContent>
         </NameContainer>
         <Link
-          key={id}
+          key={tweet_id}
           to={`/tweets/${tweet_id}`}
           style={{ textDecoration: "none", color: "white" }}
         >
@@ -72,8 +87,14 @@ const Tweets = ({
           </ContentContainer>
         </Link>
         <LikeContainer>
-          <Like />
-          <LikeCounts>{heart > 0 ? heart : ""}</LikeCounts>
+          {heartClick ? (
+            <LikeHover onClick={handleClick} />
+          ) : (
+            <Like onClick={handleClick} />
+          )}
+          <LikeCounts heartClick={heartClick}>
+            {heartList.length > 0 ? heartList.length : ""}
+          </LikeCounts>
         </LikeContainer>
       </ColumnTemplate>
     </TweetContainer>
@@ -92,9 +113,8 @@ const Row = styled.div`
 const LikeCounts = styled.p`
   font-size: 14px;
   margin-left: 13px;
-  color: wheat;
-  /* color: #e53980; */
-  font-weight: 500;
+  color: ${(props) => (props.heartClick ? "#e53980" : "white")};
+  font-weight: 600;
 `;
 
 const Like = styled(LikeIcon)`

@@ -6,12 +6,9 @@ import Reply from "./Reply";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-const DetailPage = ({ tweets }) => {
+const DetailPage = ({ tweets, main }) => {
   const params = useParams();
   const tweetId = params.tweet_id;
-
-  console.log(tweetId);
-  // 왜 아래에 일치하는 tweetId가 안찾아지나 했더니 tostring()으로 바꾸니까 해결! 자료형이 안맞아서 안됐던 것 같다.
 
   const navigate = useNavigate();
 
@@ -37,12 +34,12 @@ const DetailPage = ({ tweets }) => {
               content={tweet.content}
               created_date={tweet.createdDate}
               tweet_id={tweet.tweetId}
-              heart={tweet.heartCount}
+              heartList={tweet.heartUserList}
             />
           ))}
-        <Reply />
+        <Reply key={main.userId} main={main} />
       </DetailPageContainer>
-      <Search />
+      <Search tweets={tweets} />
     </>
   );
 };

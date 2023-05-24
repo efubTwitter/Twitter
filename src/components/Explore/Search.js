@@ -1,33 +1,38 @@
 import styled from "styled-components";
-import Trends from "./Trends";
+import User from "./User";
 
-const Search = () => {
-  // 해시태그 기능 넣으면 해시태그 개수 기준으로 내림차순 정렬
+const Search = ({ tweets }) => {
+  let users = tweets.map((n) => n.writer);
+  let filteredUsers = users.filter((user, index, array) => {
+    // 현재 userId와 이전 요소들의 userId를 비교하여 다른 것만 필터링
+    return array.findIndex((el) => el.userId === user.userId) === index;
+  });
   return (
     <SearchContainer>
       <SearchBar placeholder="Search Twitter"></SearchBar>
       <TrendsContainer>
-        <TrendsTitle>Trends for you</TrendsTitle>
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
-        <Trends />
+        <TrendsTitle>Connect</TrendsTitle>
+        {filteredUsers.map((u) => (
+          <User
+            margin="340px"
+            key={u.userId}
+            id={u.userId}
+            name={u.name}
+            photo={u.profilePhoto}
+          />
+        ))}
       </TrendsContainer>
     </SearchContainer>
   );
 };
 
 const SearchContainer = styled.div`
-  margin-left: 30px;
+  margin-left: 35px;
+  width: 25rem;
 `;
 
 const SearchBar = styled.input`
-  width: 320px;
+  width: 370px;
   height: 45px;
   border-radius: 25px;
   color: white;
@@ -45,10 +50,11 @@ const TrendsContainer = styled.div`
   background-color: #16171c;
   border-radius: 20px;
   padding-left: 20px;
-  padding-right: 20px;
+  padding-right: 25px;
   padding-bottom: 10px;
   padding-top: 0.1px;
   margin-top: 20px;
+  width: 350px;
 `;
 
 const TrendsTitle = styled.p`

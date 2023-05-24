@@ -42,7 +42,7 @@ const AddTweet = ({ main, tweets, setTweets }) => {
     try {
       const res = await axios.post("http://3.38.233.150:8080/tweets", data);
       if (res.status === "201") {
-        setTweets([...tweets, res.data]);
+        setTweets((prevTweets) => [...prevTweets, res.data]);
       }
       console.log(res.status);
     } catch (error) {
@@ -79,7 +79,12 @@ const AddTweet = ({ main, tweets, setTweets }) => {
           <label htmlFor="file">
             <ImgIcon />
           </label>
-          <Button text="Tweet" types="2" type="submit" />
+          <Button
+            text="Tweet"
+            types="2"
+            isHover={tweetContent.length > 0 ? true : false}
+            type="submit"
+          />
         </BtnContainer>
         <Line />
       </form>

@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import Button from "../Button";
-import { ReactComponent as ExampleImg } from "../../images/profile_example.svg";
 
-const Reply = () => {
+const Reply = ({ main }) => {
   return (
     <ReplyContainer>
-      <ProfileImg />
+      <ProfileImg src={main.profilePhoto} />
       <ReplyInput placeholder="Tweet your reply!" />
       <Button text="Reply" types="2" />
     </ReplyContainer>
@@ -17,6 +16,8 @@ const ReplyContainer = styled.div`
   border-bottom: 1px solid #303336;
   display: flex;
   align-items: center;
+  height: 90px;
+  padding-right: 10px;
 `;
 
 const ReplyInput = styled.input`
@@ -31,10 +32,11 @@ const ReplyInput = styled.input`
   outline: 0;
 `;
 
-const ProfileImg = styled(ExampleImg)`
+const ProfileImg = styled.img`
   width: 50px;
   padding-left: 18px;
   cursor: pointer;
+  border-radius: 50%;
 `;
 
 export default Reply;

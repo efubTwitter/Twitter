@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
-const Button = ({ text, types }) => {
+const Button = ({ text, types, isHover }) => {
   return types === "1" ? (
     <Btn1>{text}</Btn1>
   ) : types === "2" ? (
-    <Btn2>{text}</Btn2>
+    isHover ? (
+      <Btn2>{text}</Btn2>
+    ) : (
+      <Btn2Hover>{text}</Btn2Hover>
+    )
   ) : (
     <Btn3>{text}</Btn3>
   );
@@ -37,20 +41,30 @@ const Btn2 = styled.button`
   margin-bottom: 4px;
 `;
 
+const Btn2Hover = styled.button`
+  width: 85px;
+  height: 37px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: 700;
+  background-color: #2099ed;
+  opacity: 50%;
+  cursor: pointer;
+  margin-bottom: 4px;
+`;
+
 const Btn3 = styled.button`
-  width: 115px;
-  height: 38px;
+  width: 7rem;
+  height: 2.3rem;
   border: none;
   border-radius: 30px;
   font-size: 1rem;
-  color: white;
+  color: black;
   font-weight: 700;
-  background-color: black;
+  background-color: white;
   cursor: pointer;
-  border: 1px solid #566470;
-  margin-left: 510px;
-  margin-top: 12px;
-  margin-right: 15px;
 `;
 
 export default Button;

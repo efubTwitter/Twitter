@@ -66,11 +66,14 @@ function App() {
           {tweets.length > 0 && (
             <Route
               path="/tweets/:tweet_id"
-              element={<DetailPage tweets={tweets} />}
+              element={<DetailPage tweets={tweets} main={mainUser} />}
             ></Route>
           )}
           {tweets.length > 0 && (
-            <Route path="/explore" element={<Explore />}></Route>
+            <Route
+              path="/explore"
+              element={<Explore tweets={tweets} />}
+            ></Route>
           )}
 
           {tweets.length > 0 && (

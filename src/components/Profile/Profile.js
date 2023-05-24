@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
 import Tweets from "../Tweets/Tweets";
-import Button from "../Button";
 import Search from "../Explore/Search";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 const Profile = ({ tweets }) => {
+  const [page, setPage] = useState("tweets");
   const params = useParams();
   const userId = params.id;
   const navigate = useNavigate();
@@ -33,7 +34,6 @@ const Profile = ({ tweets }) => {
           <BackgroundImg src={user.writer.headerPhoto} />
         </Img>
         <ProfileImg src={user.writer.profilePhoto} />
-        <Button text="Edit profile" type="3" />
         <Intro>
           <Name>{user.writer.name}</Name>
           <NickName>@{user.writer.userId}</NickName>
@@ -42,29 +42,54 @@ const Profile = ({ tweets }) => {
         </Intro>
         <SelectContainer>
           <OptionContainer>
-            <Select1>Tweets</Select1>
-            <Highlight />
-          </OptionContainer>
-          <Select2>Replies</Select2>
-          <Select2>Media</Select2>
-          <Select2>Likes</Select2>
-        </SelectContainer>
-        {tweets
-          .filter((u) => u.writer.userId === userId)
-          .map((tweet) => (
-            <Tweets
-              key={tweet.writer.userId}
-              id={tweet.writer.userId}
-              name={tweet.writer.name}
-              profile_photo={tweet.writer.profilePhoto}
-              content={tweet.content}
-              created_date={tweet.createdDate}
-              tweet_id={tweet.tweetId}
-              heart={tweet.heatCount}
+            <Select1 onClick={() => setPage("tweets")} show={page}>
+              Tweets
+            </Select1>
+            <Highlight
+              style={{ display: page === "tweets" ? "block" : "none" }}
             />
-          ))}
+          </OptionContainer>
+          <OptionContainer>
+            <Select2 onClick={() => setPage("likes")} show={page}>
+              Likes
+            </Select2>
+            <Highlight
+              style={{ display: page === "likes" ? "block" : "none" }}
+            />
+          </OptionContainer>
+        </SelectContainer>
+        {page === "tweets" &&
+          tweets
+            .filter((u) => u.writer.userId === userId)
+            .map((tweet) => (
+              <Tweets
+                key={tweet.tweetId}
+                id={tweet.writer.userId}
+                name={tweet.writer.name}
+                profile_photo={tweet.writer.profilePhoto}
+                content={tweet.content}
+                created_date={tweet.createdDate}
+                tweet_id={tweet.tweetId}
+                heartList={tweet.heartUserList}
+              />
+            ))}
+        {page === "likes" &&
+          tweets
+            .filter((t) => t.heartUserList.includes(userId))
+            .map((n) => (
+              <Tweets
+                key={n.writer.userId}
+                id={n.writer.userId}
+                name={n.writer.name}
+                profile_photo={n.writer.profilePhoto}
+                content={n.content}
+                created_date={n.createdDate}
+                tweet_id={n.tweetId}
+                heartList={n.heartUserList}
+              />
+            ))}
       </ProfileContainer>
-      <Search />
+      <Search tweets={tweets} />
     </Container>
   );
 };
@@ -82,7 +107,15 @@ const SelectContainer = styled.div`
   border-bottom: 1px solid #303336;
 `;
 
-const OptionContainer = styled.div``;
+const OptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  :hover {
+    background-color: #181818;
+  }
+`;
 
 const Highlight = styled.div`
   width: 60px;
@@ -92,12 +125,18 @@ const Highlight = styled.div`
 `;
 
 const Select1 = styled.p`
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  cursor: pointer;
+  background-color: black;
+  border: none;
+  color: ${(props) => (props.show === "tweets" ? "white" : "#72767a")};
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 const Select2 = styled(Select1)`
-  color: #72767a;
+  color: ${(props) => (props.show === "likes" ? "white" : "#72767a")};
 `;
 
 const ProfileContainer = styled.div`
@@ -136,7 +175,7 @@ const Header = styled.div`
 
 const Intro = styled.div`
   height: 100px;
-  margin-top: 1.7rem;
+  margin-top: 4.5rem;
   margin-left: 20px;
   margin-bottom: 50px;
 `;

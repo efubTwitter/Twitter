@@ -24,7 +24,7 @@ const NavBar = ({ main_user }) => {
       <ExploreNavLink to="/explore">
         <MenuContainer>
           <HashTag />
-          <P>Explore</P>
+          <P>Connect</P>
         </MenuContainer>
       </ExploreNavLink>
       <ProfileNavLink
@@ -37,7 +37,9 @@ const NavBar = ({ main_user }) => {
           <P>Profile</P>
         </MenuContainer>
       </ProfileNavLink>
-      <Button text="Tweet" types="1" />
+      <Link to="/">
+        <Button text="Tweet" types="1" />
+      </Link>
       <Link to="/users/efubteam1">
         <User>
           <ProfileImg src={main_user.profilePhoto} />
@@ -184,7 +186,7 @@ const MenuContainer = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  width: 130px;
+  width: 150px;
   height: 55px;
   padding-left: 13px;
   margin-bottom: 5px;
