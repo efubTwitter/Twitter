@@ -1,7 +1,7 @@
 ## 💙 Twitter 클론 코딩
 
 ### 🔗 기능 설명
-필수 기능 구현 완료(5/17 ~ 5/21)
+### 필수 기능 구현 완료(5/17 ~ 5/21)
 - [x] 좌측 네비게이션 바의 라우팅 부분
 - [x] 메인 화면의 전체 트윗 보기 기능(GET) 및 화면
 - [x] 세부 화면의 트윗 개별 보기 기능(GET) 및 화면
@@ -9,7 +9,7 @@
 - [x] 트윗 작성 기능(POST)
 - [x] 트윗 삭제 기능(DELETE)
 
-추가 구현 기능(5/22 ~ 5/30)
+### 추가 구현 기능(5/22 ~ 5/30)
 - [x] 좋아요 버튼(POST, DELETE)
 - [x] 좋아요 누른 게시글만 모아보기 (각 트윗에 있는 좋아요 누른 사람들의 id 리스트에서 일치하는 id만 필터링)
 - [x] 팔로잉 기능(POST)
@@ -17,7 +17,7 @@
 - [x] 팔로잉하는 유저들의 게시글만 모아보기 (팔로잉하는 유저 리스트에 있는 id와 전체 트윗 작성자 id를 비교해 일치하는 것만 필터링)
 - [x] 화이트모드 / 다크모드 전환하기(Redux 활용)
 
-디자인 디테일 추가
+### 디자인 디테일 추가
 - [x] 트윗 내용 입력 유무에 따라 버튼 활성화/비활성화 디자인
 - [x] 메뉴바의 각 메뉴 hover 효과
 - [x] home 화면의 header 뒷배경 블러 효과
@@ -28,14 +28,19 @@
 ### 🔗 상세 페이지
 ### 1. home 페이지 - 전체 트윗 조회
 <img width="1419" alt="스크린샷 2023-05-30 오전 3 11 52" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/00bb6c20-5d02-41e6-a33e-f79d756ad8cb">
+
 ### 2. home 페이지 - 팔로잉하는 유저들의 트윗만 조회
 <img width="1417" alt="스크린샷 2023-05-30 오전 3 12 11" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/661d03ed-e2e9-41b7-be3f-f41b3348f25d">
+
 ### 3. 개별 트윗 조회
 <img width="1418" alt="스크린샷 2023-05-30 오전 3 13 01" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/e869afee-f2ca-40f8-a65f-eb54cde94e76">
+
 ### 4. 유저들만 조회
 <img width="1419" alt="스크린샷 2023-05-30 오전 3 12 29" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5eaa601a-3731-49ba-94eb-674e88349517">
+
 ### 5. 프로필 조회 - 유저가 작성한 트윗만 조회
 <img width="1416" alt="스크린샷 2023-05-30 오전 3 12 37" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/7d295d86-d09d-4ad8-9e59-1fb715266b42">
+
 ### 6. 프로필 조회 - 유저가 좋아요 누른 트윗만 조회
 <img width="1421" alt="스크린샷 2023-05-30 오전 3 12 47" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/4eddcd96-69ff-454a-b801-5ddf1d885820">
 
