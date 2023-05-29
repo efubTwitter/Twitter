@@ -9,20 +9,21 @@
 - [x] 트윗 작성 기능(POST)
 - [x] 트윗 삭제 기능(DELETE)
 
-추가로 구현중인 기능(5/22 ~ )
-- [ ] 좋아요 버튼
-- [ ] 좋아요 누른 게시글 모아보기  
-- [ ] 유저검색 기능
+추가 구현 기능(5/22 ~ )
+- [x] 유저 리스트 
+- [x] 좋아요 기능
+- [x] 좋아요 누른 게시글 모아보기
+- [ ] 팔로잉 기능
 
 <br>
 
 ### 🔗 상세 페이지
-<img width="1413" alt="스크린샷 2023-05-21 오후 11 08 15" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/67f17623-a267-48aa-92fc-4b74392cb3b2">
-<img width="1414" alt="스크린샷 2023-05-21 오후 11 08 33" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5b77c7a6-3864-4ed6-891f-e654ba803cca">
-<img width="1415" alt="스크린샷 2023-05-21 오후 11 08 43" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/5588f00e-615d-4339-b5bf-88f8167feb31">
-<img width="1418" alt="스크린샷 2023-05-21 오후 11 09 10" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/8a46dc8a-6c96-4420-88dc-25abb5f16574">
-<img width="1417" alt="스크린샷 2023-05-21 오후 11 09 02" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/60763262-db4f-4670-bdf8-dc2274f67fbf">
-<img width="1416" alt="스크린샷 2023-05-21 오후 11 30 29" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/7e14264e-f1ce-4fab-af19-c75e1be2f4b3">
+
+<img width="1440" alt="스크린샷 2023-05-25 오전 4 02 31 1" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/56959775-a5b1-4b96-a512-d0a15a35daee">
+<img width="1440" alt="스크린샷 2023-05-25 오전 4 02 41" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/34bab2e2-bbc6-4032-b5b3-06754ca63927"><img width="1440" alt="스크린샷 2023-05-25 오전 4 02 49" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/0b8deea1-2ce7-42d6-bf4b-58da43544bfc">
+<img width="1436" alt="스크린샷 2023-05-25 오전 4 03 31" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/8f6b0786-a55c-4ede-8ce8-427f7326fba9">
+<img width="1439" alt="스크린샷 2023-05-25 오전 4 06 00" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/3e89f74c-1a08-4572-b21d-9c6b51e4347c">
+
 
 
 <br>
