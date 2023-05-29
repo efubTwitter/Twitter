@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
+import { ReactComponent as Write } from "../../images/write_icon.svg";
 import Tweets from "../Tweets/Tweets";
 import Search from "../Explore/Search";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Profile = ({ tweets }) => {
   const [page, setPage] = useState("tweets");
@@ -12,8 +14,12 @@ const Profile = ({ tweets }) => {
   const userId = params.id;
   const navigate = useNavigate();
 
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
+  const hover = useSelector((state) => state.hover);
+
   const user = tweets.find((u) => u.writer.userId === userId);
-  console.log(user);
+
   const handleNavigate = () => {
     navigate("/");
   };
@@ -24,7 +30,7 @@ const Profile = ({ tweets }) => {
         <Header>
           <ArrowIcon onClick={handleNavigate} />
           <ColumnTemplate>
-            <Name>{user.writer.name}</Name>
+            <Name color={color}>{user.writer.name}</Name>
             <CountTweets>
               {tweets.filter((u) => u.writer.userId === userId).length} Tweets
             </CountTweets>
@@ -35,24 +41,23 @@ const Profile = ({ tweets }) => {
         </Img>
         <ProfileImg src={user.writer.profilePhoto} />
         <Intro>
-          <Name>{user.writer.name}</Name>
+          <Name color={color}>{user.writer.name}</Name>
           <NickName>@{user.writer.userId}</NickName>
-          <Bio>{user.writer.bio}</Bio>
-          <NickName>Joined {user.writer.joinedDate.slice(0, 10)}</NickName>
+          <Bio color={color}>{user.writer.bio}</Bio>
+          <NickName>
+            <WriteIcon />
+            Joined {user.writer.joinedDate.slice(0, 10)}
+          </NickName>
         </Intro>
         <SelectContainer>
-          <OptionContainer>
-            <Select1 onClick={() => setPage("tweets")} show={page}>
-              Tweets
-            </Select1>
+          <OptionContainer onClick={() => setPage("tweets")} bgcolor={bgcolor}>
+            <Select1 show={page}>Tweets</Select1>
             <Highlight
               style={{ display: page === "tweets" ? "block" : "none" }}
             />
           </OptionContainer>
-          <OptionContainer>
-            <Select2 onClick={() => setPage("likes")} show={page}>
-              Likes
-            </Select2>
+          <OptionContainer onClick={() => setPage("likes")} bgcolor={bgcolor}>
+            <Select2 show={page}>Likes</Select2>
             <Highlight
               style={{ display: page === "likes" ? "block" : "none" }}
             />
@@ -94,6 +99,13 @@ const Profile = ({ tweets }) => {
   );
 };
 
+const WriteIcon = styled(Write)`
+  width: 20px;
+  height: 20px;
+  margin-top: 0px;
+  margin-right: 5px;
+`;
+
 const Container = styled.div`
   display: flex;
   width: 40rem;
@@ -112,6 +124,9 @@ const OptionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 50%;
+  background-color: ${(props) => props.bgcolor};
+  border: none;
+  cursor: pointer;
   :hover {
     background-color: #181818;
   }
@@ -127,8 +142,6 @@ const Highlight = styled.div`
 const Select1 = styled.p`
   font-size: 1.1rem;
   font-weight: 700;
-  cursor: pointer;
-  background-color: black;
   border: none;
   color: ${(props) => (props.show === "tweets" ? "white" : "#72767a")};
   margin-bottom: 20px;
@@ -156,6 +169,7 @@ const NickName = styled.p`
   margin-right: 5px;
   margin-bottom: 3px;
   margin-top: 1px;
+  display: flex;
 `;
 
 const Bio = styled.div`
@@ -163,6 +177,7 @@ const Bio = styled.div`
   margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: ${(props) => props.color};
 `;
 
 const Header = styled.div`
@@ -207,6 +222,7 @@ const Name = styled.p`
   font-weight: 700;
   margin-bottom: 0px;
   margin-top: 2px;
+  color: ${(props) => props.color};
 `;
 
 const ArrowIcon = styled(Arrow)`

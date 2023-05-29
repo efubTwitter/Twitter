@@ -9,8 +9,10 @@ const Button = ({ text, types, isHover }) => {
     ) : (
       <Btn2Hover>{text}</Btn2Hover>
     )
-  ) : (
+  ) : types === "3" ? (
     <Btn3>{text}</Btn3>
+  ) : (
+    <Btn4>{text}</Btn4>
   );
 };
 
@@ -56,7 +58,7 @@ const Btn2Hover = styled.button`
 `;
 
 const Btn3 = styled.button`
-  width: 7rem;
+  width: 5.5rem;
   height: 2.3rem;
   border: none;
   border-radius: 30px;
@@ -64,6 +66,18 @@ const Btn3 = styled.button`
   color: black;
   font-weight: 700;
   background-color: white;
+  cursor: pointer;
+`;
+
+const Btn4 = styled.button`
+  width: 6.5rem;
+  height: 2.3rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  color: white;
+  font-weight: 700;
+  background-color: black;
+  border: 0.1px solid white;
   cursor: pointer;
 `;
 

@@ -6,12 +6,12 @@ import Profile from "./components/Profile/Profile";
 import Explore from "./components/Explore/Explore";
 import DetailPage from "./components/Tweets/DetailPage";
 import MainUserProfile from "./components/Profile/MainUserProfile";
+import Following from "./components/Follow/Following";
+import Follower from "./components/Follow/Follwer";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
-  // 로딩 중 트위터 화면
-  const [isLoading, setIsLoading] = useState(false);
   // 전체 트윗 데이터 조회
   const [tweets, setTweets] = useState([]);
   // 메인 유저 정보 조회
@@ -21,17 +21,17 @@ function App() {
     try {
       const response = await axios.get("http://3.38.233.150:8080/home");
       const data = await response.data;
-      setTweets(data);
+      setTweets([...data]);
     } catch (error) {
       console.log("Error while fetching tweets:", error);
     }
-    setIsLoading(false);
   };
 
+  // deps를 []로 해두니 tweet 추가, 삭제 시에 바로 반영이 안되고 새로고침해야 반영됨.
+  // deps를 [tweets]로 바꾸어 변경사항이 일어나면 변경사항 바로 반영되도록 수정.
   useEffect(() => {
-    setIsLoading(true);
     getTweets();
-  }, []);
+  }, [tweets]);
 
   const getMainUser = async () => {
     try {
@@ -52,7 +52,6 @@ function App() {
   return (
     <>
       <Template>
-        {isLoading ? "...Loading" : ""}
         <NavBar main_user={mainUser} />
         <Routes>
           {tweets.length > 0 && (
@@ -78,7 +77,6 @@ function App() {
 
           {tweets.length > 0 && (
             <Route
-              key={mainUser.id}
               path="/users/:id"
               element={<Profile tweets={tweets} />}
             ></Route>
@@ -87,6 +85,18 @@ function App() {
             <Route
               path="/users/efubteam1"
               element={<MainUserProfile main={mainUser} tweets={tweets} />}
+            ></Route>
+          )}
+          {tweets.length > 0 && (
+            <Route
+              path="/users/:id/following"
+              element={<Following main={mainUser} tweets={tweets} />}
+            ></Route>
+          )}
+          {tweets.length > 0 && (
+            <Route
+              path="/users/:id/follower"
+              element={<Follower main={mainUser} tweets={tweets} />}
             ></Route>
           )}
         </Routes>

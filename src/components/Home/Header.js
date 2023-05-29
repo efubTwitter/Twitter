@@ -1,8 +1,13 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
+  const hover = useSelector((state) => state.hover);
+
   return (
-    <HeaderContainer>
+    <HeaderContainer bgcolor={bgcolor} color={color} hover={hover}>
       <Title>Home</Title>
       <SelectContainer>
         <OptionContainer>
@@ -21,7 +26,9 @@ const HeaderContainer = styled.div`
   top: 0px;
   padding-top: 12px;
   border-right: 1px solid #303336;
-  background-color: rgba(0, 0, 0, 0.65);
+  background-color: ${(props) => props.bgcolor};
+  color: ${(props) => props.color};
+  /* background-color: rgba(0, 0, 0, 0.65); */
   backdrop-filter: blur(6px);
 `;
 

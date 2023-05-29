@@ -1,19 +1,62 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
+import { ReactComponent as Write } from "../../images/write_icon.svg";
 import Tweets from "../Tweets/Tweets";
 import Search from "../Explore/Search";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MainUserProfile = ({ main, tweets }) => {
   const [page, setPage] = useState("tweets");
+  const [following, setFollowing] = useState([]);
+  const [follower, setFollower] = useState([]);
   const navigate = useNavigate();
 
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
+  const hover = useSelector((state) => state.hover);
+
   const handleNavigate = () => {
-    navigate("/");
+    navigate(-1);
   };
 
-  console.log(page);
+  // Following get 요청
+  const getFollowing = async () => {
+    try {
+      const response = await axios.get(
+        "http://3.38.233.150:8080/follows/efubteam1/followings"
+      );
+      const data = await response.data;
+      setFollowing(data);
+    } catch (error) {
+      console.log("Error while fetching tweets:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFollowing();
+  }, []);
+
+  // Followers get 요청
+  const getFollower = async () => {
+    try {
+      const res = await axios.get(
+        "http://3.38.233.150:8080/follows/efubteam1/followers"
+      );
+      const d = await res.data;
+      setFollower(d);
+      console.log(d);
+    } catch (error) {
+      console.log("Error while fetching tweets:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFollower();
+  }, []);
 
   return (
     <Container>
@@ -21,7 +64,7 @@ const MainUserProfile = ({ main, tweets }) => {
         <Header>
           <ArrowIcon onClick={handleNavigate} />
           <ColumnTemplate>
-            <Name>{main.name}</Name>
+            <Name color={color}>{main.name}</Name>
             <CountTweets>
               {tweets.filter((u) => u.writer.userId === main.userId).length}
               Tweets
@@ -33,24 +76,45 @@ const MainUserProfile = ({ main, tweets }) => {
         </Img>
         <ProfileImg src={main.profilePhoto} />
         <Intro>
-          <Name>{main.name}</Name>
+          <Name color={color}>{main.name}</Name>
           <NickName>@{main.userId}</NickName>
-          <Bio>{main.bio}</Bio>
-          <NickName>Joined {main.joinedDate.slice(0, 10)}</NickName>
+          <Bio color={color}>{main.bio}</Bio>
+          <NickName>
+            <WriteIcon />
+            Joined {main.joinedDate.slice(0, 10)}
+          </NickName>
+          <FollowContainer>
+            <Link
+              key={main.name}
+              to={`/users/${main.userId}/following`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Follow>
+                <FollowingNum color={color}>{following.length}</FollowingNum>
+                <NickName>Following</NickName>
+              </Follow>
+            </Link>
+            <Link
+              key={main.name}
+              to={`/users/${main.userId}/follower`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Follow>
+                <FollowingNum color={color}>{follower.length}</FollowingNum>
+                <NickName>Followers</NickName>
+              </Follow>
+            </Link>
+          </FollowContainer>
         </Intro>
         <SelectContainer>
-          <OptionContainer>
-            <Select1 onClick={() => setPage("tweets")} show={page}>
-              Tweets
-            </Select1>
+          <OptionContainer onClick={() => setPage("tweets")}>
+            <Select1 show={page}>Tweets</Select1>
             <Highlight
               style={{ display: page === "tweets" ? "block" : "none" }}
             />
           </OptionContainer>
-          <OptionContainer>
-            <Select2 onClick={() => setPage("likes")} show={page}>
-              Likes
-            </Select2>
+          <OptionContainer onClick={() => setPage("likes")}>
+            <Select2 show={page}>Likes</Select2>
             <Highlight
               style={{ display: page === "likes" ? "block" : "none" }}
             />
@@ -92,6 +156,30 @@ const MainUserProfile = ({ main, tweets }) => {
   );
 };
 
+const FollowContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const Follow = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0;
+  margin-right: 15px;
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+const WriteIcon = styled(Write)`
+  width: 20px;
+  height: 20px;
+  margin-top: 0px;
+  margin-right: 5px;
+`;
+
 const Container = styled.div`
   display: flex;
   width: 40rem;
@@ -105,11 +193,14 @@ const SelectContainer = styled.div`
   border-bottom: 1px solid #303336;
 `;
 
-const OptionContainer = styled.div`
+const OptionContainer = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 50%;
+  background-color: black;
+  border: none;
+  cursor: pointer;
   :hover {
     background-color: #181818;
   }
@@ -122,11 +213,9 @@ const Highlight = styled.div`
   border-radius: 5px;
 `;
 
-const Select1 = styled.button`
+const Select1 = styled.p`
   font-size: 1.1rem;
   font-weight: 700;
-  cursor: pointer;
-  background-color: black;
   border: none;
   color: ${(props) => (props.show === "tweets" ? "white" : "#72767a")};
   margin-bottom: 20px;
@@ -154,6 +243,7 @@ const NickName = styled.p`
   margin-right: 5px;
   margin-bottom: 3px;
   margin-top: 1px;
+  display: flex;
 `;
 
 const Bio = styled.div`
@@ -161,6 +251,14 @@ const Bio = styled.div`
   margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: ${(props) => props.color};
+`;
+
+const FollowingNum = styled(Bio)`
+  font-weight: 600;
+  margin: 0px;
+  padding-right: 6px;
+  color: ${(props) => props.color};
 `;
 
 const Header = styled.div`
@@ -175,7 +273,7 @@ const Intro = styled.div`
   height: 100px;
   margin-top: 4.5rem;
   margin-left: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 55px;
 `;
 
 const CountTweets = styled.p`
@@ -205,6 +303,7 @@ const Name = styled.p`
   font-weight: 700;
   margin-bottom: 0px;
   margin-top: 2px;
+  color: ${(props) => props.color};
 `;
 
 const ArrowIcon = styled(Arrow)`

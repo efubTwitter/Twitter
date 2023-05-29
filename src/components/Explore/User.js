@@ -1,15 +1,39 @@
 import styled from "styled-components";
-import { ReactComponent as MenuIcon } from "../../images/menu_icon.svg";
 import Button from "../Button";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
-const User = ({ margin, id, name, photo }) => {
-  const [toggleSetting, setToggleSetting] = useState(false);
+const User = ({ id, name, photo, bio }) => {
+  const [following, setFollowing] = useState([]);
 
-  const ToggleIcon = () => {
-    setToggleSetting(!toggleSetting);
+  const color = useSelector((state) => state.color);
+
+  // Follow post 요청
+  const postFollow = async () => {
+    const res = await axios.post("http://3.38.233.150:8080/follows/efubteam1", {
+      followingId: id,
+    });
+    console.log(res, res.status);
   };
+
+  // Following get 요청
+  const getFollowing = async () => {
+    try {
+      const response = await axios.get(
+        "http://3.38.233.150:8080/follows/efubteam1/followings"
+      );
+      const data = await response.data;
+      setFollowing(data);
+    } catch (error) {
+      console.log("Error while fetching tweets:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFollowing();
+  }, [following]);
 
   return (
     <TrendsContent>
@@ -18,14 +42,24 @@ const User = ({ margin, id, name, photo }) => {
           <ProfileImg src={photo} />
         </Link>
         <Column>
-          <HashTag>{name}</HashTag>
+          <HashTag color={color}>{name}</HashTag>
           <Trend>@{id}</Trend>
+          <Bio>{bio}</Bio>
         </Column>
-        <Button text="Follow" types="3" />
+        <Follow onClick={postFollow}>
+          {following.filter((n) => n.userId === id).length === 0 && (
+            <Button text="Follow" types="3" />
+          )}
+          {following.filter((n) => n.userId === id).length > 0 && (
+            <Button text="Following" types="4" />
+          )}
+        </Follow>
       </Align>
     </TrendsContent>
   );
 };
+
+const Follow = styled.div``;
 
 const Column = styled.div`
   display: flex;
@@ -37,7 +71,6 @@ const Column = styled.div`
 const ProfileImg = styled.img`
   width: 50px;
   height: 50px;
-  margin-top: 15px;
   border-radius: 50%;
   cursor: pointer;
 `;
@@ -64,8 +97,12 @@ const HashTag = styled.p`
   font-size: 16px;
   font-weight: 600;
   margin: 0;
-  margin-top: 3px;
+  color: ${(props) => props.color};
   margin-bottom: 4px;
+`;
+
+const Bio = styled(HashTag)`
+  margin-top: 8px;
 `;
 
 export default User;

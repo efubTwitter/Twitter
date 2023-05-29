@@ -24,16 +24,17 @@ const Explore = ({ tweets }) => {
           <TrendsTitle>Connect</TrendsTitle>
         </Header>
         <H1>Suggested for you</H1>
-        {filteredUsers.map((u) => (
-          <User
-            margin="340px"
-            key={u.userId}
-            id={u.userId}
-            name={u.name}
-            photo={u.profilePhoto}
-            bio={u.bio}
-          />
-        ))}
+        {filteredUsers
+          .filter((el) => el.userId !== "efubteam1")
+          .map((u) => (
+            <User
+              key={u.userId}
+              id={u.userId}
+              name={u.name}
+              photo={u.profilePhoto}
+              bio={u.bio}
+            />
+          ))}
       </TrendsContainer>
     </ExploreContainer>
   );

@@ -3,6 +3,7 @@ import { ReactComponent as MenuIcon } from "../../images/menu_icon.svg";
 import { ReactComponent as DeleteButton } from "../../images/delete_icon.svg";
 import { ReactComponent as LikeIcon } from "../../images/like_icon.svg";
 import { ReactComponent as LikeIconHover } from "../../images/like_icon_hover.svg";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -18,6 +19,9 @@ const Tweets = ({
 }) => {
   const [toggleSetting, setToggleSetting] = useState(false);
   const [heartClick, setHeartClick] = useState(heartList.includes("efubteam1"));
+
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
 
   const ToggleIcon = () => {
     if (id === "efubteam1") setToggleSetting(!toggleSetting);
@@ -38,11 +42,9 @@ const Tweets = ({
     axios
       .delete(`http://3.38.233.150:8080/tweets/${tweet_id}`)
       .then(function (response) {
-        // handle success
         console.log(response.status);
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       });
   };
@@ -63,13 +65,13 @@ const Tweets = ({
               to={`/users/${id}`}
               style={{ textDecoration: "none" }}
             >
-              <Name>{name}</Name>
+              <Name color={color}>{name}</Name>
             </Link>
             <NickName>@{id}</NickName>
             <Time>{date}</Time>
           </Row>
           <SettingIcon onClick={ToggleIcon} />
-          <SettingContent toggle={toggleSetting}>
+          <SettingContent toggle={toggleSetting} bgcolor={bgcolor}>
             <BtnTemplate onClick={handleDeleteContent}>
               <DeleteBtn />
               <DeleteContent>Delete</DeleteContent>
@@ -82,7 +84,7 @@ const Tweets = ({
           style={{ textDecoration: "none", color: "white" }}
         >
           <ContentContainer>
-            <Content>{content}</Content>
+            <Content color={color}>{content}</Content>
             {/* <Img src="https://pbs.twimg.com/media/FwSB0wEXwAQQKgE?format=jpg&name=900x900" /> */}
           </ContentContainer>
         </Link>
@@ -181,7 +183,7 @@ const NickName = styled.p`
 const Name = styled(NickName)`
   font-weight: 700;
   cursor: pointer;
-  color: white;
+  color: ${(props) => props.color};
   &:hover {
     border-bottom: 1px solid white;
   }
@@ -207,7 +209,7 @@ const SettingContent = styled.div`
   align-items: center;
   border: 1px solid #303336;
   border-radius: 12px;
-  background-color: black;
+  background-color: ${(props) => props.bgcolor};
   position: absolute;
   margin-left: 243px;
   margin-top: 80px;
@@ -225,6 +227,7 @@ const ContentContainer = styled.div`
 
 const Content = styled.p`
   margin-top: 4px;
+  color: ${(props) => props.color};
 `;
 
 const Img = styled.img`

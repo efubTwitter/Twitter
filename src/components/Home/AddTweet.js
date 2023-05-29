@@ -4,11 +4,14 @@ import { ReactComponent as DeleteImgIcon } from "../../images/delete_img_icon.sv
 import { useState, useRef } from "react";
 import Button from "../Button";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AddTweet = ({ main, tweets, setTweets }) => {
   const [imgfile, setImgFile] = useState("");
   const [tweetContent, setTweetContent] = useState(""); // 입력된 트윗 내용 상태 추가
   const imgRef = useRef();
+
+  const bgcolor = useSelector((state) => state.backgroundColor);
 
   // 이미지 프리뷰 생성
   const saveImgFile = () => {
@@ -61,6 +64,7 @@ const AddTweet = ({ main, tweets, setTweets }) => {
             placeholder="What is happening?!"
             value={tweetContent}
             onChange={handleTweetContentChange}
+            bgcolor={bgcolor}
           ></InputText>
         </AddContainer>
         <ImgContainer imgfile={imgfile}>
@@ -140,7 +144,7 @@ const InputText = styled.input`
   height: 50%;
   font-size: 22px;
   font-weight: 500;
-  background-color: black;
+  background-color: ${(props) => props.bgcolor};
   border: none;
   margin-left: 15px;
   color: white;

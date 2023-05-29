@@ -1,11 +1,17 @@
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
 const Template = ({ children }) => {
-  return <Container>{children}</Container>;
+  const bgcolor = useSelector((state) => state.backgroundColor);
+
+  return <Container bgcolor={bgcolor}>{children}</Container>;
 };
 
 const Container = styled.div`
   display: flex;
+  background-color: ${(props) => props.bgcolor};
+  padding-left: 6%;
+  padding-right: 6%;
 `;
 
 export default Template;
