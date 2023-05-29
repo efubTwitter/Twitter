@@ -47,6 +47,7 @@ const MainContainer = styled.div`
   border-left: 1px solid #303336;
   margin-left: 270px;
   width: 40rem;
+  height: 80rem;
 `;
 
 export default Main;

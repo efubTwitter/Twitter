@@ -109,7 +109,7 @@ const WriteIcon = styled(Write)`
 const Container = styled.div`
   display: flex;
   width: 40rem;
-  height: 100vh;
+  height: 80rem;
 `;
 
 const SelectContainer = styled.div`

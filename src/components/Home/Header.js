@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
-  const hover = useSelector((state) => state.hover);
+  const blur = useSelector((state) => state.blur);
 
   return (
-    <HeaderContainer bgcolor={bgcolor} color={color} hover={hover}>
+    <HeaderContainer bgcolor={bgcolor} color={color} blur={blur}>
       <Title>Home</Title>
       <SelectContainer>
         <OptionContainer>
@@ -28,7 +28,7 @@ const HeaderContainer = styled.div`
   border-right: 1px solid #303336;
   background-color: ${(props) => props.bgcolor};
   color: ${(props) => props.color};
-  /* background-color: rgba(0, 0, 0, 0.65); */
+  background-color: ${(props) => props.blur};
   backdrop-filter: blur(6px);
 `;
 

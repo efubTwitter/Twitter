@@ -12,6 +12,7 @@ const Container = styled.div`
   background-color: ${(props) => props.bgcolor};
   padding-left: 6%;
   padding-right: 6%;
+  height: 80rem;
 `;
 
 export default Template;

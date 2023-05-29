@@ -5,10 +5,13 @@ import Search from "../Explore/Search";
 import Reply from "./Reply";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const DetailPage = ({ tweets, main }) => {
   const params = useParams();
   const tweetId = params.tweet_id;
+
+  const color = useSelector((state) => state.color);
 
   const navigate = useNavigate();
 
@@ -21,7 +24,7 @@ const DetailPage = ({ tweets, main }) => {
       <DetailPageContainer>
         <Header>
           <ArrowIcon onClick={handleNavigate} />
-          <Category>Tweet</Category>
+          <Category color={color}>Tweet</Category>
         </Header>
         {tweets
           .filter((u) => u.tweetId.toString() === tweetId.toString())
@@ -73,6 +76,7 @@ const Category = styled.p`
   font-weight: 700;
   margin-bottom: 0px;
   margin-top: 2px;
+  color: ${(props) => props.color};
 `;
 
 export default DetailPage;

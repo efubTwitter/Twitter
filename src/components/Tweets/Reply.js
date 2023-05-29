@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import Button from "../Button";
+import { useSelector } from "react-redux";
 
 const Reply = ({ main }) => {
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
+
   return (
     <ReplyContainer>
       <ProfileImg src={main.profilePhoto} />
-      <ReplyInput placeholder="Tweet your reply!" />
+      <ReplyInput
+        placeholder="Tweet your reply!"
+        bgcolor={bgcolor}
+        color={color}
+      />
       <Button text="Reply" types="2" />
     </ReplyContainer>
   );
 };
 
 const ReplyContainer = styled.div`
-  border-top: 1px solid #303336;
   border-bottom: 1px solid #303336;
   display: flex;
   align-items: center;
@@ -25,16 +32,16 @@ const ReplyInput = styled.input`
   height: 50%;
   font-size: 22px;
   font-weight: 500;
-  background-color: black;
+  background-color: ${(props) => props.bgcolor};
   border: none;
   margin-left: 15px;
-  color: white;
+  color: ${(props) => props.color};
   outline: 0;
 `;
 
 const ProfileImg = styled.img`
   width: 50px;
-  padding-left: 18px;
+  margin-left: 18px;
   cursor: pointer;
   border-radius: 50%;
 `;

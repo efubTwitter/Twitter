@@ -135,7 +135,7 @@ const LikeHover = styled(LikeIconHover)`
 
 const TweetContainer = styled.div`
   display: flex;
-  border-top: 1px solid #303336;
+  border-bottom: 1px solid #303336;
 `;
 
 const NameContainer = styled.div`

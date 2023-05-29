@@ -11,6 +11,7 @@ const AddTweet = ({ main, tweets, setTweets }) => {
   const [tweetContent, setTweetContent] = useState(""); // 입력된 트윗 내용 상태 추가
   const imgRef = useRef();
 
+  const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
 
   // 이미지 프리뷰 생성
@@ -65,6 +66,7 @@ const AddTweet = ({ main, tweets, setTweets }) => {
             value={tweetContent}
             onChange={handleTweetContentChange}
             bgcolor={bgcolor}
+            color={color}
           ></InputText>
         </AddContainer>
         <ImgContainer imgfile={imgfile}>
@@ -129,7 +131,8 @@ const DeleteImgBtn = styled(DeleteImgIcon)`
 
 const ProfileImg = styled.img`
   width: 50px;
-  padding-left: 18px;
+  height: 50px;
+  margin-left: 18px;
   border-radius: 50%;
 `;
 
@@ -147,7 +150,7 @@ const InputText = styled.input`
   background-color: ${(props) => props.bgcolor};
   border: none;
   margin-left: 15px;
-  color: white;
+  color: ${(props) => props.color};
   outline: 0;
 `;
 

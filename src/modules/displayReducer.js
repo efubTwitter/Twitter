@@ -2,6 +2,7 @@ const initialState = {
   backgroundColor: "black",
   color: "white",
   hover: "#181818",
+  blur: "rgba(0, 0, 0, 0.65)",
 };
 
 function displayReducer(currentState = initialState, action) {
@@ -12,6 +13,7 @@ function displayReducer(currentState = initialState, action) {
         backgroundColor: "white",
         color: "black",
         hover: "#eaeaea",
+        blur: "white",
       };
     case "black":
       return {
@@ -19,6 +21,7 @@ function displayReducer(currentState = initialState, action) {
         backgroundColor: "black",
         color: "white",
         hover: "#181818",
+        blur: "rgba(0, 0, 0, 0.65)",
       };
     default:
       return currentState;

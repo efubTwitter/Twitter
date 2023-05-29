@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import User from "./User";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const Search = ({ tweets }) => {
   let users = tweets.map((n) => n.writer);
@@ -18,7 +19,7 @@ const Search = ({ tweets }) => {
       <TrendsContainer hover={hover}>
         <TrendsTitle color={color}>Who to Follow</TrendsTitle>
         {filteredUsers
-          .filter((el) => el.userId !== "efubteam1")
+          .filter((_, i) => i > 2)
           .map((u) => (
             <User
               margin="340px"

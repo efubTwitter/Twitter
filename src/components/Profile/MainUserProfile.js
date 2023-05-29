@@ -107,13 +107,13 @@ const MainUserProfile = ({ main, tweets }) => {
           </FollowContainer>
         </Intro>
         <SelectContainer>
-          <OptionContainer onClick={() => setPage("tweets")}>
+          <OptionContainer onClick={() => setPage("tweets")} bgcolor={bgcolor}>
             <Select1 show={page}>Tweets</Select1>
             <Highlight
               style={{ display: page === "tweets" ? "block" : "none" }}
             />
           </OptionContainer>
-          <OptionContainer onClick={() => setPage("likes")}>
+          <OptionContainer onClick={() => setPage("likes")} bgcolor={bgcolor}>
             <Select2 show={page}>Likes</Select2>
             <Highlight
               style={{ display: page === "likes" ? "block" : "none" }}
@@ -183,7 +183,7 @@ const WriteIcon = styled(Write)`
 const Container = styled.div`
   display: flex;
   width: 40rem;
-  height: 100vh;
+  height: 80rem;
 `;
 
 const SelectContainer = styled.div`
@@ -198,7 +198,7 @@ const OptionContainer = styled.button`
   flex-direction: column;
   align-items: center;
   width: 50%;
-  background-color: black;
+  background-color: ${(props) => props.bgcolor};
   border: none;
   cursor: pointer;
   :hover {
