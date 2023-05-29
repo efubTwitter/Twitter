@@ -3,10 +3,9 @@ import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
 import User from "../Explore/User";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const Following = ({ main, tweets }) => {
+const Following = ({ main }) => {
   const [following, setFollowing] = useState([]);
   const navigate = useNavigate();
 

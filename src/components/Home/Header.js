@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ option, setOption }) => {
   const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
   const blur = useSelector((state) => state.blur);
@@ -10,11 +11,21 @@ const Header = () => {
     <HeaderContainer bgcolor={bgcolor} color={color} blur={blur}>
       <Title>Home</Title>
       <SelectContainer>
-        <OptionContainer>
-          <Select1>For you</Select1>
-          <Highlight />
+        <OptionContainer onClick={() => setOption("foryou")} bgcolor={bgcolor}>
+          <Select1 show={option}>For you</Select1>
+          <Highlight
+            style={{ display: option === "foryou" ? "block" : "none" }}
+          />
         </OptionContainer>
-        <Select2>Following</Select2>
+        <OptionContainer
+          onClick={() => setOption("following")}
+          bgcolor={bgcolor}
+        >
+          <Select2 show={option}>Following</Select2>
+          <Highlight
+            style={{ display: option === "following" ? "block" : "none" }}
+          />
+        </OptionContainer>
       </SelectContainer>
     </HeaderContainer>
   );
@@ -48,10 +59,14 @@ const Title = styled.p`
 const Select1 = styled.p`
   font-size: 1rem;
   font-weight: 700;
+  border: none;
+  color: ${(props) => (props.show === "foryou" ? "white" : "#72767a")};
+  margin-bottom: 20px;
+  margin-top: 20px;
 `;
 
 const Select2 = styled(Select1)`
-  color: #72767a;
+  color: ${(props) => (props.show === "following" ? "white" : "#72767a")};
 `;
 
 const Highlight = styled.div`
@@ -61,6 +76,17 @@ const Highlight = styled.div`
   border-radius: 5px;
 `;
 
-const OptionContainer = styled.div``;
+const OptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  background-color: ${(props) => props.bgcolor};
+  border: none;
+  cursor: pointer;
+  :hover {
+    background-color: #181818;
+  }
+`;
 
 export default Header;
