@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
+import { ReactComponent as ArrowWhite } from "../../images/arrow_white.svg";
 import { ReactComponent as Write } from "../../images/write_icon.svg";
 import Tweets from "../Tweets/Tweets";
 import Search from "../Explore/Search";
@@ -62,7 +63,11 @@ const MainUserProfile = ({ main, tweets }) => {
     <Container>
       <ProfileContainer>
         <Header>
-          <ArrowIcon onClick={handleNavigate} />
+          {color === "white" ? (
+            <ArrowIcon onClick={handleNavigate} />
+          ) : (
+            <ArrowWhiteIcon onClick={handleNavigate} />
+          )}
           <ColumnTemplate>
             <Name color={color}>{main.name}</Name>
             <CountTweets>
@@ -107,14 +112,26 @@ const MainUserProfile = ({ main, tweets }) => {
           </FollowContainer>
         </Intro>
         <SelectContainer>
-          <OptionContainer onClick={() => setPage("tweets")} bgcolor={bgcolor}>
-            <Select1 show={page}>Tweets</Select1>
+          <OptionContainer
+            onClick={() => setPage("tweets")}
+            bgcolor={bgcolor}
+            hover={hover}
+          >
+            <Select1 show={page} color={color}>
+              Tweets
+            </Select1>
             <Highlight
               style={{ display: page === "tweets" ? "block" : "none" }}
             />
           </OptionContainer>
-          <OptionContainer onClick={() => setPage("likes")} bgcolor={bgcolor}>
-            <Select2 show={page}>Likes</Select2>
+          <OptionContainer
+            onClick={() => setPage("likes")}
+            bgcolor={bgcolor}
+            hover={hover}
+          >
+            <Select2 show={page} color={color}>
+              Likes
+            </Select2>
             <Highlight
               style={{ display: page === "likes" ? "block" : "none" }}
             />
@@ -155,6 +172,12 @@ const MainUserProfile = ({ main, tweets }) => {
     </Container>
   );
 };
+
+const ArrowWhiteIcon = styled(ArrowWhite)`
+  width: 20px;
+  margin-right: 40px;
+  cursor: pointer;
+`;
 
 const FollowContainer = styled.div`
   display: flex;
@@ -202,7 +225,7 @@ const OptionContainer = styled.button`
   border: none;
   cursor: pointer;
   :hover {
-    background-color: #181818;
+    background-color: ${(props) => props.hover};
   }
 `;
 
@@ -217,13 +240,13 @@ const Select1 = styled.p`
   font-size: 1.1rem;
   font-weight: 700;
   border: none;
-  color: ${(props) => (props.show === "tweets" ? "white" : "#72767a")};
+  color: ${(props) => (props.show === "tweets" ? props.color : "#72767a")};
   margin-bottom: 20px;
   margin-top: 20px;
 `;
 
 const Select2 = styled(Select1)`
-  color: ${(props) => (props.show === "likes" ? "white" : "#72767a")};
+  color: ${(props) => (props.show === "likes" ? props.color : "#72767a")};
 `;
 
 const ProfileContainer = styled.div`

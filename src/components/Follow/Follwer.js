@@ -1,12 +1,19 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
+import { ReactComponent as ArrowWhite } from "../../images/arrow_white.svg";
 import User from "../Explore/User";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const Follower = ({ main }) => {
   const [follower, setFollower] = useState([]);
+
+  const color = useSelector((state) => state.color);
+  const bgcolor = useSelector((state) => state.backgroundColor);
+  const hover = useSelector((state) => state.hover);
+
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -38,18 +45,26 @@ const Follower = ({ main }) => {
   return (
     <ExploreContainer>
       <Header>
-        <ArrowIcon onClick={handleNavigate} />
+        {color === "white" ? (
+          <ArrowIcon onClick={handleNavigate} />
+        ) : (
+          <ArrowWhiteIcon onClick={handleNavigate} />
+        )}
         <NameContainer>
-          <TrendsTitle>{main.name}</TrendsTitle>
+          <TrendsTitle color={color}>{main.name}</TrendsTitle>
           <NickName>@{main.userId}</NickName>
         </NameContainer>
       </Header>
       <SelectContainer>
-        <OptionContainer>
-          <Select1>Followers</Select1>
+        <OptionContainer bgcolor={bgcolor} hover={hover}>
+          <Select1 color={color}>Followers</Select1>
           <Highlight />
         </OptionContainer>
-        <OptionContainer onClick={handleNavigateFollowing}>
+        <OptionContainer
+          onClick={handleNavigateFollowing}
+          bgcolor={bgcolor}
+          hover={hover}
+        >
           <Select2>Following</Select2>
         </OptionContainer>
       </SelectContainer>
@@ -67,6 +82,12 @@ const Follower = ({ main }) => {
     </ExploreContainer>
   );
 };
+
+const ArrowWhiteIcon = styled(ArrowWhite)`
+  width: 20px;
+  margin-right: 40px;
+  cursor: pointer;
+`;
 
 const FollowContainer = styled.div`
   margin-left: 20px;
@@ -86,11 +107,11 @@ const OptionContainer = styled.button`
   flex-direction: column;
   align-items: center;
   width: 50%;
-  background-color: black;
+  background-color: ${(props) => props.bgcolor};
   border: none;
   cursor: pointer;
   :hover {
-    background-color: #181818;
+    background-color: ${(props) => props.hover};
   }
 `;
 
@@ -98,7 +119,7 @@ const Select1 = styled.p`
   font-size: 1.1rem;
   font-weight: 700;
   border: none;
-  color: white;
+  color: ${(props) => props.color};
   margin-bottom: 20px;
   margin-top: 20px;
 `;
@@ -154,6 +175,7 @@ const TrendsTitle = styled.p`
   font-size: 22px;
   font-weight: 700;
   margin: 0px;
+  color: ${(props) => props.color};
 `;
 
 export default Follower;

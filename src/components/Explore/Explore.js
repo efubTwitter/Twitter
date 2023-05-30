@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
+import { ReactComponent as ArrowWhite } from "../../images/arrow_white.svg";
 import User from "./User";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -23,7 +24,11 @@ const Explore = ({ tweets }) => {
     <ExploreContainer>
       <TrendsContainer>
         <Header>
-          <ArrowIcon onClick={handleNavigate} />
+          {color === "white" ? (
+            <ArrowIcon onClick={handleNavigate} />
+          ) : (
+            <ArrowWhiteIcon onClick={handleNavigate} />
+          )}
           <TrendsTitle color={color}>Connect</TrendsTitle>
         </Header>
         <H1 color={color}>Suggested for you</H1>
@@ -56,6 +61,12 @@ const Header = styled.div`
 `;
 
 const ArrowIcon = styled(Arrow)`
+  width: 20px;
+  margin-right: 40px;
+  cursor: pointer;
+`;
+
+const ArrowWhiteIcon = styled(ArrowWhite)`
   width: 20px;
   margin-right: 40px;
   cursor: pointer;

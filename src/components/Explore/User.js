@@ -44,7 +44,7 @@ const User = ({ id, name, photo, bio }) => {
         <Column>
           <HashTag color={color}>{name}</HashTag>
           <Trend>@{id}</Trend>
-          <Bio>{bio}</Bio>
+          <Bio color={color}>{bio}</Bio>
         </Column>
         <Follow onClick={postFollow}>
           {following.filter((n) => n.userId === id).length === 0 && (
@@ -103,6 +103,7 @@ const HashTag = styled.p`
 
 const Bio = styled(HashTag)`
   margin-top: 8px;
+  color: ${(props) => props.color};
 `;
 
 export default User;

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ReactComponent as MenuIcon } from "../../images/menu_icon.svg";
 import { ReactComponent as DeleteButton } from "../../images/delete_icon.svg";
 import { ReactComponent as LikeIcon } from "../../images/like_icon.svg";
+import { ReactComponent as LikeWhiteIcon } from "../../images/like_white.svg";
 import { ReactComponent as LikeIconHover } from "../../images/like_icon_hover.svg";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -91,8 +92,10 @@ const Tweets = ({
         <LikeContainer>
           {heartClick ? (
             <LikeHover onClick={handleClick} />
-          ) : (
+          ) : color === "white" ? (
             <Like onClick={handleClick} />
+          ) : (
+            <LikeWhite onClick={handleClick} />
           )}
           <LikeCounts heartClick={heartClick}>
             {heartList.length > 0 ? heartList.length : ""}
@@ -120,6 +123,13 @@ const LikeCounts = styled.p`
 `;
 
 const Like = styled(LikeIcon)`
+  width: 19px;
+  margin: 0px;
+  height: 50px;
+  cursor: pointer;
+`;
+
+const LikeWhite = styled(LikeWhiteIcon)`
   width: 19px;
   margin: 0px;
   height: 50px;

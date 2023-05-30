@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Arrow } from "../../images/arrow_icon.svg";
+import { ReactComponent as ArrowWhite } from "../../images/arrow_white.svg";
 import Tweets from "./Tweets";
 import Search from "../Explore/Search";
 import Reply from "./Reply";
@@ -23,7 +24,11 @@ const DetailPage = ({ tweets, main }) => {
     <>
       <DetailPageContainer>
         <Header>
-          <ArrowIcon onClick={handleNavigate} />
+          {color === "white" ? (
+            <ArrowIcon onClick={handleNavigate} />
+          ) : (
+            <ArrowWhiteIcon onClick={handleNavigate} />
+          )}
           <Category color={color}>Tweet</Category>
         </Header>
         {tweets
@@ -46,6 +51,12 @@ const DetailPage = ({ tweets, main }) => {
     </>
   );
 };
+
+const ArrowWhiteIcon = styled(ArrowWhite)`
+  width: 20px;
+  margin-right: 40px;
+  cursor: pointer;
+`;
 
 const DetailPageContainer = styled.div`
   display: flex;

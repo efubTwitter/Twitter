@@ -1,27 +1,28 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 const Header = ({ option, setOption }) => {
   const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
+  const hover = useSelector((state) => state.hover);
   const blur = useSelector((state) => state.blur);
 
   return (
     <HeaderContainer bgcolor={bgcolor} color={color} blur={blur}>
       <Title>Home</Title>
       <SelectContainer>
-        <OptionContainer onClick={() => setOption("foryou")} bgcolor={bgcolor}>
-          <Select1 show={option}>For you</Select1>
+        <OptionContainer onClick={() => setOption("foryou")} hover={hover}>
+          <Select1 show={option} color={color}>
+            For you
+          </Select1>
           <Highlight
             style={{ display: option === "foryou" ? "block" : "none" }}
           />
         </OptionContainer>
-        <OptionContainer
-          onClick={() => setOption("following")}
-          bgcolor={bgcolor}
-        >
-          <Select2 show={option}>Following</Select2>
+        <OptionContainer onClick={() => setOption("following")} hover={hover}>
+          <Select2 show={option} color={color}>
+            Following
+          </Select2>
           <Highlight
             style={{ display: option === "following" ? "block" : "none" }}
           />
@@ -37,7 +38,6 @@ const HeaderContainer = styled.div`
   top: 0px;
   padding-top: 12px;
   border-right: 1px solid #303336;
-  background-color: ${(props) => props.bgcolor};
   color: ${(props) => props.color};
   background-color: ${(props) => props.blur};
   backdrop-filter: blur(6px);
@@ -60,13 +60,13 @@ const Select1 = styled.p`
   font-size: 1rem;
   font-weight: 700;
   border: none;
-  color: ${(props) => (props.show === "foryou" ? "white" : "#72767a")};
+  color: ${(props) => (props.show === "foryou" ? props.color : "#72767a")};
   margin-bottom: 20px;
   margin-top: 20px;
 `;
 
 const Select2 = styled(Select1)`
-  color: ${(props) => (props.show === "following" ? "white" : "#72767a")};
+  color: ${(props) => (props.show === "following" ? props.color : "#72767a")};
 `;
 
 const Highlight = styled.div`
@@ -81,11 +81,10 @@ const OptionContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 50%;
-  background-color: ${(props) => props.bgcolor};
   border: none;
   cursor: pointer;
   :hover {
-    background-color: #181818;
+    background-color: ${(props) => props.hover};
   }
 `;
 
