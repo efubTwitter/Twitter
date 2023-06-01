@@ -5,10 +5,14 @@ import User from "../Explore/User";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const Follower = ({ main }) => {
+const Follower = ({ main, tweets }) => {
   const [follower, setFollower] = useState([]);
+
+  const params = useParams();
+  const userId = params.id;
 
   const color = useSelector((state) => state.color);
   const bgcolor = useSelector((state) => state.backgroundColor);
@@ -21,14 +25,14 @@ const Follower = ({ main }) => {
   };
 
   const handleNavigateFollowing = () => {
-    navigate("/users/efubteam1/following");
+    navigate(`/users/${userId}/following`);
   };
 
   // Followers get 요청
   const getFollower = async () => {
     try {
       const res = await axios.get(
-        "http://3.38.233.150:8080/follows/efubteam1/followers"
+        `http://3.38.233.150:8080/follows/${userId}/followers`
       );
       const d = await res.data;
       setFollower(d);
@@ -42,6 +46,9 @@ const Follower = ({ main }) => {
     getFollower();
   }, []);
 
+  let user = tweets.filter((el) => el.writer.userId === userId);
+  let name = user[0].writer.name;
+
   return (
     <ExploreContainer>
       <Header>
@@ -51,8 +58,8 @@ const Follower = ({ main }) => {
           <ArrowWhiteIcon onClick={handleNavigate} />
         )}
         <NameContainer>
-          <TrendsTitle color={color}>{main.name}</TrendsTitle>
-          <NickName>@{main.userId}</NickName>
+          <TrendsTitle color={color}>{name}</TrendsTitle>
+          <NickName>@{userId}</NickName>
         </NameContainer>
       </Header>
       <SelectContainer>

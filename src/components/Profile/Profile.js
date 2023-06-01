@@ -6,11 +6,15 @@ import Tweets from "../Tweets/Tweets";
 import Search from "../Explore/Search";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Profile = ({ tweets }) => {
   const [page, setPage] = useState("tweets");
+  const [following, setFollowing] = useState([]);
+  const [follower, setFollower] = useState([]);
   const params = useParams();
   const userId = params.id;
   const navigate = useNavigate();
@@ -24,6 +28,40 @@ const Profile = ({ tweets }) => {
   const handleNavigate = () => {
     navigate("/");
   };
+
+  // Following get 요청
+  const getFollowing = async () => {
+    try {
+      const response = await axios.get(
+        `http://3.38.233.150:8080/follows/${userId}/followings`
+      );
+      const data = await response.data;
+      setFollowing(data);
+    } catch (error) {
+      console.log("Error while fetching tweets:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFollowing();
+  }, []);
+
+  // Followers get 요청
+  const getFollower = async () => {
+    try {
+      const res = await axios.get(
+        `http://3.38.233.150:8080/follows/${userId}/followers`
+      );
+      const d = await res.data;
+      setFollower(d);
+    } catch (error) {
+      console.log("Error while fetching tweets:", error);
+    }
+  };
+
+  useEffect(() => {
+    getFollower();
+  }, []);
 
   return (
     <Container>
@@ -54,6 +92,28 @@ const Profile = ({ tweets }) => {
             <WriteIcon />
             Joined {user.writer.joinedDate.slice(0, 10)}
           </NickName>
+          <FollowContainer>
+            <Link
+              key={user.writer.name}
+              to={`/users/${userId}/following`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Follow>
+                <FollowingNum color={color}>{following.length}</FollowingNum>
+                <NickName>Following</NickName>
+              </Follow>
+            </Link>
+            <Link
+              key={user.writer.name}
+              to={`/users/${userId}/follower`}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <Follow>
+                <FollowingNum color={color}>{follower.length}</FollowingNum>
+                <NickName>Followers</NickName>
+              </Follow>
+            </Link>
+          </FollowContainer>
         </Intro>
         <SelectContainer>
           <OptionContainer
@@ -116,6 +176,38 @@ const Profile = ({ tweets }) => {
     </Container>
   );
 };
+
+const Bio = styled.div`
+  word-break: break-all;
+  margin-right: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: ${(props) => props.color};
+`;
+
+const FollowContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const Follow = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0;
+  margin-right: 15px;
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+const FollowingNum = styled(Bio)`
+  font-weight: 600;
+  margin: 0px;
+  padding-right: 6px;
+  color: ${(props) => props.color};
+`;
 
 const ArrowWhiteIcon = styled(ArrowWhite)`
   width: 20px;
@@ -194,14 +286,6 @@ const NickName = styled.p`
   margin-bottom: 3px;
   margin-top: 1px;
   display: flex;
-`;
-
-const Bio = styled.div`
-  word-break: break-all;
-  margin-right: 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: ${(props) => props.color};
 `;
 
 const Header = styled.div`
