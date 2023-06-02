@@ -82,6 +82,8 @@
 
 ### 🔗 팀 노션 링크 
 #### [EFUB 1팀 Notion](https://www.notion.so/fa7b4ac9bdce4f7b8f41d9e6effaccc8?v=ae541729529e4db6a833c9d9645c5060&pvs=4)
+<img width="1028" alt="스크린샷 2023-06-02 오후 10 33 53" src="https://github.com/efubTwitter/twitter-frontend/assets/104717341/a5f6da8a-89b7-4be3-91b7-02ec2317851e">
+
 
 <br>
 
